@@ -2,7 +2,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+
 import appointmentsRouter from './routes/appointments.js';
 import settingsRouter from './routes/settings.js';
 import authRouter from './routes/auth.js';
@@ -49,6 +49,7 @@ async function connectDatabase() {
     return;
   }
 
+  const { MongoMemoryServer } = await import('mongodb-memory-server');
   const memoryServer = await MongoMemoryServer.create();
   await mongoose.connect(memoryServer.getUri());
 }

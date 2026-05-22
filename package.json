@@ -1,0 +1,19 @@
+{
+  "name": "dr-johnny-najmeh-website",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "start": "npm run dev",
+    "install:all": "npm install --prefix server && npm install --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "firebase": "^12.13.0",
+    "react-helmet-async": "^3.0.0",
+    "react-router": "^7.15.1",
+    "react-router-dom": "^7.15.1"
+  }
+}

@@ -1,0 +1,23 @@
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.control {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--input-background);
+  padding: 13px 16px;
+  color: var(--foreground);
+}
+
+.control:focus {
+  outline: 2px solid rgba(8, 145, 178, 0.25);
+  border-color: rgba(8, 145, 178, 0.5);
+}

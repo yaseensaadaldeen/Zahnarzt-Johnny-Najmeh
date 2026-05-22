@@ -1,0 +1,24 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(241, 245, 249, 0.9);
+  border-radius: 999px;
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.option {
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.active {
+  background: linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(8, 145, 178, 0.35);
+}

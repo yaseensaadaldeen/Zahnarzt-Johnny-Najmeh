@@ -1,0 +1,48 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(8px);
+  z-index: 90;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  z-index: 91;
+}
+
+.card {
+  position: relative;
+  width: min(980px, 100%);
+  padding: 32px;
+  border-radius: 32px;
+  max-height: min(90vh, 920px);
+  overflow: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(8, 145, 178, 0.08);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+}

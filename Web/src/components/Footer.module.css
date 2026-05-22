@@ -1,0 +1,132 @@
+.footer {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 56px 0 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.title {
+  margin: 0 0 16px;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+}
+
+.subtitle {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+}
+
+.copy,
+.list,
+.contactList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #cbd5e1;
+  display: grid;
+  gap: 12px;
+}
+
+.contactList li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+}
+
+.footerLink {
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #ffffff;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.actionButton,
+.actionButtonSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+.actionButton {
+  background: #0891b2;
+  color: #ffffff;
+}
+
+.actionButtonSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e2e8f0;
+}
+
+.bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.panelButton {
+  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.accent {
+  color: #fbbf24;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid,
+  .bottom {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

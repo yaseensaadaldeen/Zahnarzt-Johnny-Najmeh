@@ -1,0 +1,25 @@
+.wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 18px 16px;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.table thead th {
+  background: rgba(241, 245, 249, 0.6);
+  border-top: 0;
+}
+
+.table tbody tr:hover {
+  background: rgba(241, 245, 249, 0.45);
+}

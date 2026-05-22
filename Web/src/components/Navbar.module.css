@@ -1,0 +1,123 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.inner {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%);
+  color: #ffffff;
+  font-family: var(--font-serif);
+  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.24);
+}
+
+.brandLogo {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: left center;
+  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.24);
+  background: #ffffff;
+}
+
+.brandTitle {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.brandSubtitle {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.link {
+  position: relative;
+  padding: 12px 16px;
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.activePill {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22d3ee 0%, #0891b2 50%, #3b82f6 100%);
+  box-shadow: 0 0 10px rgba(8, 145, 178, 0.5);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuButton {
+  display: none;
+  border: 0;
+  background: transparent;
+}
+
+.mobilePanel {
+  display: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mobileNav {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0 16px;
+}
+
+.mobileLink {
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+.mobileLinkActive {
+  background: rgba(8, 145, 178, 0.1);
+  color: var(--primary);
+}
+
+@media (max-width: 960px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuButton,
+  .mobilePanel {
+    display: block;
+  }
+}

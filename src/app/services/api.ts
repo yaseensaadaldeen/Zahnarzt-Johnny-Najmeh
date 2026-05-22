@@ -142,3 +142,11 @@ export const availabilityApi = {
       method: 'DELETE',
     }),
 };
+
+export const contactApi = {
+  send: (payload: { name: string; email: string; phone?: string; subject?: string; message: string }) =>
+    request<{ success: boolean; message: string }>(`${API_BASE}/contact`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+};

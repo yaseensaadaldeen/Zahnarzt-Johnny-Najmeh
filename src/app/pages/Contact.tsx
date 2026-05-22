@@ -3,7 +3,8 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { SEO } from '../components/SEO';
-import { MapPin, Phone, Mail, Clock, Car, Train, Footprints, Navigation } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Car, Train, Footprints, Navigation, Loader2 } from 'lucide-react';
+import { contactApi } from '../services/api';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -13,12 +14,22 @@ export function Contact() {
     subject: '',
     message: ''
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    alert('Thank you for your message! We will get back to you shortly.');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setSubmitting(true);
+    setStatus(null);
+    try {
+      await contactApi.send(formData);
+      setStatus({ type: 'success', message: 'Ihre Nachricht wurde gesendet. Wir melden uns bald bei Ihnen.' });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } catch {
+      setStatus({ type: 'error', message: 'Fehler beim Senden. Bitte versuchen Sie es später oder rufen Sie uns an.' });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -221,8 +232,13 @@ export function Contact() {
                     required
                   />
                 </div>
-                <Button type="submit" variant="primary" className="w-full">
-                  Send Message
+                {status && (
+                  <div className={`p-4 rounded-lg text-sm ${status.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                    {status.message}
+                  </div>
+                )}
+                <Button type="submit" variant="primary" className="w-full" disabled={submitting}>
+                  {submitting ? <><Loader2 size={18} className="animate-spin mr-2" /> Sending...</> : 'Send Message'}
                 </Button>
               </form>
             </Card>

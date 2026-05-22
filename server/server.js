@@ -7,6 +7,7 @@ import appointmentsRouter from './routes/appointments.js';
 import settingsRouter from './routes/settings.js';
 import authRouter from './routes/auth.js';
 import availabilityRouter from './routes/availability.js';
+import contactRouter from './routes/contact.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { Settings } from './models/Settings.js';
 import { getOrCreateAvailability } from './models/Availability.js';
@@ -27,6 +28,7 @@ app.use('/api/appointments', appointmentsRouter);
 app.use('/api/settings', settingsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/availability', availabilityRouter);
+app.use('/api/contact', contactRouter);
 app.use(errorHandler);
 
 async function seedSettings() {

@@ -34,8 +34,19 @@ export const authApi = {
   verify: async () => (await api.post('/auth/verify', { token: sessionStorage.getItem('dentistToken') })).data,
 };
 
+let availabilityCache = null;
+
 export const availabilityApi = {
-  get: async () => (await api.get('/availability')).data,
+  get: async () => {
+    try {
+      const data = (await api.get('/availability')).data;
+      availabilityCache = data;
+      return data;
+    } catch (err) {
+      if (availabilityCache) return availabilityCache;
+      throw err;
+    }
+  },
   updateWeekly: async (weeklyShifts) => (await api.put('/availability/weekly', { weeklyShifts })).data,
   addOutTime: async (payload) => (await api.post('/availability/out-times', payload)).data,
   updateOutTime: async (id, payload) => (await api.put(`/availability/out-times/${id}`, payload)).data,

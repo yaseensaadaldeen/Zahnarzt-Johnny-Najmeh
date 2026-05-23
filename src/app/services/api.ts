@@ -120,8 +120,19 @@ export interface Availability {
   outTimes: OutTime[];
 }
 
+let availabilityCache: Availability | null = null;
+
 export const availabilityApi = {
-  get: () => request<Availability>(`${API_BASE}/availability`),
+  get: async () => {
+    try {
+      const data = await request<Availability>(`${API_BASE}/availability`);
+      availabilityCache = data;
+      return data;
+    } catch (err) {
+      if (availabilityCache) return availabilityCache;
+      throw err;
+    }
+  },
   updateWeekly: (weeklyShifts: WeeklyShift[]) =>
     request<Availability>(`${API_BASE}/availability/weekly`, {
       method: 'PUT',

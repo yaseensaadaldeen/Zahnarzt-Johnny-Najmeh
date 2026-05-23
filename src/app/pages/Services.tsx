@@ -109,8 +109,8 @@ export function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-cyan-50">
       <SEO
-        title="Leistungen – Zahnarzt Johnny Najmeh | Zahnarzt in Freiburg"
-        description="Entdecken Sie unser Leistungsspektrum: Professionelle Zahnreinigung, Zahnimplantate, Kieferorthopädie, ästhetische Zahnmedizin und mehr. Zahnarzt Johnny Najmeh in Freiburg."
+        title="Leistungen – Zahnarzt Johnny Najmeh | Zahnarzt in Ludwigshafen am Rhein"
+        description="Entdecken Sie unser Leistungsspektrum: Professionelle Zahnreinigung, Zahnimplantate, Kieferorthopädie, ästhetische Zahnmedizin und mehr. Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein."
         canonical="/services"
       />
       {/* Header */}

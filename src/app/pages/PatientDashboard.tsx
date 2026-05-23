@@ -14,7 +14,7 @@ export function PatientDashboard() {
     name: 'John Doe',
     email: 'john@example.com',
     phone: '+49 123 456 7890',
-    address: 'Sample Street 123, Freiburg'
+    address: 'Sample Street 123, Ludwigshafen am Rhein'
   });
 
   useEffect(() => {

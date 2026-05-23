@@ -103,7 +103,7 @@ export default function HomePage() {
                 {t({ de: 'Moderne Zahnmedizin, jeden Tag', en: 'Modern Dentistry, Every Day' })}
               </p>
               <p className="lead" style={{ maxWidth: 720, margin: '0 auto 32px' }}>
-                Sundgauallee 15, Freiburg. {t({ de: 'Wir sind jeden Tag der Woche fuer Sie da.', en: 'We are here for you every day of the week.' })}
+                Schanzstraße 105, Ludwigshafen am Rhein. {t({ de: 'Wir sind jeden Tag der Woche fuer Sie da.', en: 'We are here for you every day of the week.' })}
               </p>
               <div className="button-row" style={{ justifyContent: 'center' }}>
                 <Link to="/contact" className="pill" style={{ background: 'var(--primary)', color: '#fff', padding: '16px 26px' }}>
@@ -270,15 +270,15 @@ export default function HomePage() {
             <div className="split-layout">
               <CenteredCard>
                 <div style={{ padding: '32px' }}>
-                  <span className="eyebrow"><MapPin size={16} /> Freiburg</span>
+                  <span className="eyebrow"><MapPin size={16} /> Ludwigshafen am Rhein</span>
                   <h2 className="heading-section" style={{ marginTop: '20px' }}>{t({ de: 'Standort und Anfahrt', en: 'Location & Directions' })}</h2>
                   <div style={{ display: 'grid', gap: '18px' }}>
                     <div>
-                      <strong>Sundgauallee 15, 79110 Freiburg im Breisgau</strong>
+                      <strong>Schanzstraße 105, 67063 Ludwigshafen am Rhein</strong>
                     </div>
                     <div className="muted">{t({ de: 'Mit dem Auto: Kostenlose Parkplaetze hinter der Praxis.', en: 'By car: Free parking behind the clinic.' })}</div>
-                    <div className="muted">{t({ de: 'Mit der Strassenbahn: Linie 5, Haltestelle Sundgauallee.', en: 'By tram: Line 5, stop Sundgauallee.' })}</div>
-                    <div className="muted">{t({ de: 'Zu Fuss: 5 Minuten vom Hauptbahnhof, neben Rewe.', en: 'On foot: 5 minutes from the main station, next to Rewe.' })}</div>
+                    <div className="muted">{t({ de: 'Mit der Strassenbahn: Gute Anbindung an den oeffentlichen Nahverkehr.', en: 'By tram: Well connected to public transit.' })}</div>
+                    <div className="muted">{t({ de: 'Zu Fuss: Zentrale Lage mit guter Erreichbarkeit.', en: 'On foot: Central location with easy accessibility.' })}</div>
                     <Link to="/location" className="pill" style={{ background: 'var(--primary)', color: '#fff', width: 'fit-content' }}>
                       {t({ de: 'Route ansehen', en: 'View Directions' })}
                     </Link>
@@ -288,7 +288,7 @@ export default function HomePage() {
               <CenteredCard>
                 <iframe
                   title={t({ de: 'Zahnarzt Johnny Najmeh Karte', en: 'Dentist Johnny Najmeh map' })}
-                  src="https://www.google.com/maps?q=Sundgauallee%2015%20Freiburg&z=15&output=embed"
+                  src="https://www.google.com/maps?q=Schanzstrasse%20105%20Ludwigshafen&z=15&output=embed"
                   style={{ width: '100%', minHeight: '420px', border: 0, display: 'block' }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

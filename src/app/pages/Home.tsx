@@ -17,7 +17,7 @@ const PHONE_REGEX = /^[\+\d][\d\s\-\(\)\.]{6,20}$/;
 
 const todayStr = () => new Date().toISOString().split('T')[0];
 
-const homeTimeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+const homeTimeSlots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
 
 export function Home() {
   const { t } = useLanguage();
@@ -257,7 +257,7 @@ export function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg text-muted-foreground mb-8"
               >
-                Sundgauallee 15, Freiburg. {t('Wir sind jeden Tag der Woche für Sie da.', 'We are here for you every day of the week.')}
+                Schanzstraße 105, Ludwigshafen am Rhein. {t('Wir sind jeden Tag der Woche für Sie da.', 'We are here for you every day of the week.')}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

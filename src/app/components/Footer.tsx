@@ -60,15 +60,15 @@ export function Footer() {
             <ul className="space-y-3 text-slate-300">
               <li className="flex items-start gap-2">
                 <MapPin size={20} className="mt-1 flex-shrink-0" />
-                <span>Sundgauallee 15<br />79110 Freiburg im Breisgau<br />Germany</span>
+                <span>Schanzstraße 105<br />67063 Ludwigshafen am Rhein<br />Germany</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={20} />
-                <a href="tel:+497612345678" className="hover:text-primary transition-colors">+49 761 234 5678</a>
+                <a href="tel:+491622731687" className="hover:text-primary transition-colors">+49 162 2731687</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={20} />
-                <a href="mailto:info@dr-najmeh.de" className="hover:text-primary transition-colors">info@dr-najmeh.de</a>
+                <a href="mailto:info.za.johnny@gmail.com" className="hover:text-primary transition-colors">info.za.johnny@gmail.com</a>
               </li>
             </ul>
           </div>

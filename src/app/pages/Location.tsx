@@ -10,8 +10,8 @@ export function Location() {
   return (
     <div className="min-h-screen bg-white pt-20">
       <SEO
-        title="Anfahrt – Zahnarzt Johnny Najmeh | Zahnarzt in Freiburg"
-        description="So finden Sie uns: Zahnarzt Johnny Najmeh in Freiburg. Adresse, Anfahrt mit PKW, öffentlichen Verkehrsmitteln und Parkmöglichkeiten."
+        title="Anfahrt – Zahnarzt Johnny Najmeh | Zahnarzt in Ludwigshafen am Rhein"
+        description="So finden Sie uns: Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Adresse, Anfahrt mit PKW, öffentlichen Verkehrsmitteln und Parkmöglichkeiten."
         canonical="/location"
       />
       {/* Header */}
@@ -23,8 +23,8 @@ export function Location() {
             </h1>
             <p className="text-xl max-w-2xl mx-auto opacity-90">
               {t(
-                'Besuchen Sie uns in unserer modernen Praxis im Herzen von Freiburg',
-                'Visit us at our modern practice in the heart of Freiburg'
+                'Besuchen Sie uns in unserer modernen Praxis in Ludwigshafen am Rhein',
+                'Visit us at our modern practice in Ludwigshafen am Rhein'
               )}
             </p>
           </div>
@@ -50,12 +50,12 @@ export function Location() {
                     <div>
                       <h3 className="font-semibold mb-2">{t('Adresse', 'Address')}</h3>
                       <p className="text-muted-foreground">
-                        Sundgauallee 15<br />
-                        79110 Freiburg im Breisgau<br />
+                        Schanzstraße 105<br />
+                        67063 Ludwigshafen am Rhein<br />
                         Deutschland
                       </p>
                       <a
-                        href="https://maps.google.com/?q=Sundgauallee+15+Freiburg"
+                        href="https://maps.google.com/?q=Schanzstrasse+105+Ludwigshafen"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary font-medium hover:underline inline-flex items-center gap-1 mt-2"
@@ -72,8 +72,8 @@ export function Location() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">{t('Telefon', 'Phone')}</h3>
-                      <a href="tel:+497612345678" className="text-muted-foreground hover:text-primary">
-                        +49 761 234 5678
+                      <a href="tel:+491622731687" className="text-muted-foreground hover:text-primary">
+                        +49 162 2731687
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         {t('Erreichbar während der Öffnungszeiten', 'Available during opening hours')}
@@ -87,8 +87,8 @@ export function Location() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">E-Mail</h3>
-                      <a href="mailto:info@dr-najmeh.de" className="text-muted-foreground hover:text-primary">
-                        info@dr-najmeh.de
+                      <a href="mailto:info.za.johnny@gmail.com" className="text-muted-foreground hover:text-primary">
+                        info.za.johnny@gmail.com
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         {t('Antwort innerhalb von 24 Stunden', 'Response within 24 hours')}
@@ -104,10 +104,9 @@ export function Location() {
                       <h3 className="font-semibold mb-2">{t('Öffnungszeiten', 'Opening Hours')}</h3>
                       <div className="text-muted-foreground space-y-1">
                         <p className="font-semibold text-foreground">
-                          {t('Jeden Tag der Woche', 'Every Day of the Week')}
+                          {t('Von Montag bis Donnerstag', 'Monday to Thursday')}
                         </p>
-                        <p>{t('Montag - Sonntag', 'Monday - Sunday')}</p>
-                        <p className="font-semibold text-foreground">8:00 - 20:00</p>
+                        <p className="font-semibold text-foreground">09:00 - 19:00</p>
                         <p className="text-accent mt-2">
                           {t('Notfalltermine täglich verfügbar', 'Emergency appointments available daily')}
                         </p>
@@ -163,8 +162,8 @@ export function Location() {
                   </h3>
                   <p className="text-muted-foreground">
                     {t(
-                      'Straßenbahnlinie 5 - Haltestelle "Sundgauallee". Nur 2 Minuten Fußweg.',
-                      'Tram line 5 - stop "Sundgauallee". Just a 2-minute walk.'
+                      'Straßenbahn- und Bushaltestellen in der Nähe. Nur wenige Gehminuten entfernt.',
+                      'Tram and bus stops nearby. Just a short walk away.'
                     )}
                   </p>
                 </Card>
@@ -176,8 +175,8 @@ export function Location() {
                   <h3 className="font-semibold text-lg mb-2">{t('Zu Fuß', 'By Foot')}</h3>
                   <p className="text-muted-foreground">
                     {t(
-                      '5 Minuten vom Freiburger Hauptbahnhof. Neben dem Rewe-Supermarkt.',
-                      '5-minute walk from Freiburg main station. Next to Rewe supermarket.'
+                      '5 Minuten vom Ludwigshafener Hauptbahnhof. Neben dem Rewe-Supermarkt.',
+                      '5-minute walk from Ludwigshafen main station. Next to Rewe supermarket.'
                     )}
                   </p>
                 </Card>

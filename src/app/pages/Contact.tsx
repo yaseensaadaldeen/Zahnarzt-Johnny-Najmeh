@@ -35,8 +35,8 @@ export function Contact() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Kontakt – Zahnarzt Johnny Najmeh | Zahnarzt in Freiburg"
-        description="Kontaktieren Sie Zahnarzt Johnny Najmeh in Freiburg. Telefon, E-Mail, Anfahrt und Online-Kontaktformular. Wir freuen uns auf Ihre Nachricht."
+        title="Kontakt – Zahnarzt Johnny Najmeh | Zahnarzt in Ludwigshafen am Rhein"
+        description="Kontaktieren Sie Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Telefon, E-Mail, Anfahrt und Online-Kontaktformular. Wir freuen uns auf Ihre Nachricht."
         canonical="/contact"
       />
       {/* Header */}
@@ -66,12 +66,12 @@ export function Contact() {
                     <div>
                       <h3 className="font-semibold mb-2">Address</h3>
                       <p className="text-muted-foreground">
-                        Sundgauallee 15<br />
-                        79110 Freiburg im Breisgau<br />
+                        Schanzstraße 105<br />
+                        67063 Ludwigshafen am Rhein<br />
                         Germany
                       </p>
                       <a
-                        href="https://maps.google.com/?q=Sundgauallee+15+Freiburg"
+                        href="https://maps.google.com/?q=Schanzstrasse+105+Ludwigshafen"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary font-medium hover:underline inline-flex items-center gap-1 mt-2"
@@ -88,8 +88,8 @@ export function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Phone</h3>
-                      <a href="tel:+497612345678" className="text-muted-foreground hover:text-primary">
-                        +49 761 234 5678
+                      <a href="tel:+491622731687" className="text-muted-foreground hover:text-primary">
+                        +49 162 2731687
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         Available during opening hours
@@ -103,8 +103,8 @@ export function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Email</h3>
-                      <a href="mailto:info@dr-najmeh.de" className="text-muted-foreground hover:text-primary">
-                        info@dr-najmeh.de
+                      <a href="mailto:info.za.johnny@gmail.com" className="text-muted-foreground hover:text-primary">
+                        info.za.johnny@gmail.com
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">
                         We'll respond within 24 hours
@@ -166,7 +166,7 @@ export function Contact() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">By Public Transport</h3>
                 <p className="text-muted-foreground">
-                  Tram line 5 - stop "Sundgauallee". Just a 2-minute walk from the stop.
+                  Tram and bus stops nearby. Just a short walk from the practice.
                 </p>
               </Card>
 
@@ -176,7 +176,7 @@ export function Contact() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">By Foot</h3>
                 <p className="text-muted-foreground">
-                  5-minute walk from Freiburg main station. Next to Rewe supermarket.
+                  5-minute walk from Ludwigshafen main station. Next to Rewe supermarket.
                 </p>
               </Card>
             </div>
@@ -253,10 +253,10 @@ export function Contact() {
           <p className="text-lg mb-6 opacity-90">
             We provide same-day emergency appointments every day of the week
           </p>
-          <a href="tel:+497612345678">
+          <a href="tel:+491622731687">
             <Button variant="secondary" className="bg-white text-primary hover:bg-white/90">
               <Phone size={20} className="mr-2" />
-              Call Us Now: +49 761 234 5678
+              Call Us Now: +49 162 2731687
             </Button>
           </a>
         </div>

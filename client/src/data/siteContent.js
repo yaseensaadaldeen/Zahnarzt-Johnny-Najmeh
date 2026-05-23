@@ -7,12 +7,12 @@ export const services = [
     title: { de: 'Zahnaerztliche Untersuchung', en: 'Dental Examination' },
     category: { de: 'Diagnostik', en: 'Diagnostics' },
     description: {
-      de: 'Gruendliche Untersuchung mit moderner Diagnostik, taeglicher Verfuegbarkeit und freundlicher Betreuung in Freiburg.',
-      en: 'Comprehensive examination with modern diagnostics, daily availability, and friendly care in Freiburg.',
+      de: 'Gruendliche Untersuchung mit moderner Diagnostik, taeglicher Verfuegbarkeit und freundlicher Betreuung in Ludwigshafen am Rhein.',
+      en: 'Comprehensive examination with modern diagnostics, daily availability, and friendly care in Ludwigshafen am Rhein.',
     },
     detail: {
-      de: 'Die auf der Live-Website veroeffentlichte Hauptleistung ist die zahnaerztliche Untersuchung. Sie ist online buchbar, dauert 30 Minuten und wird in der Praxis in der Sundgauallee 15 in Freiburg angeboten.',
-      en: 'The main service published on the live website is the dental examination. It can be booked online, lasts 30 minutes, and is offered at the clinic on Sundgauallee 15 in Freiburg.',
+      de: 'Die auf der Live-Website veroeffentlichte Hauptleistung ist die zahnaerztliche Untersuchung. Sie ist online buchbar, dauert 30 Minuten und wird in der Praxis in der Schanzstraße 105 in Ludwigshafen am Rhein angeboten.',
+      en: 'The main service published on the live website is the dental examination. It can be booked online, lasts 30 minutes, and is offered at the clinic on Schanzstraße 105 in Ludwigshafen am Rhein.',
     },
     duration: '30 min',
     price: 'kostenfallabhaengig',
@@ -226,8 +226,8 @@ export const testimonials = [
   {
     author: 'Zahnarztpraxis Zahnarzt Johnny',
     quote: {
-      de: 'Besuchen Sie die Zahnarztpraxis Zahnarzt Johnny in Freiburg, die taeglich geoeffnet ist, auch am Wochenende.',
-      en: 'Visit Dentist Johnny Najmeh in Freiburg, open daily, including weekends.',
+      de: 'Besuchen Sie die Zahnarztpraxis Zahnarzt Johnny in Ludwigshafen am Rhein, die taeglich geoeffnet ist, auch am Wochenende.',
+      en: 'Visit Dentist Johnny Najmeh in Ludwigshafen am Rhein, open daily, including weekends.',
     },
   },
   {

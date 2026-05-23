@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 const router = express.Router();
 
-const RECEIVER_EMAIL = 'fachmuster@gmail.com';
+const RECEIVER_EMAIL = 'Info.za.johnny@gmail.com';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.gmail.com',

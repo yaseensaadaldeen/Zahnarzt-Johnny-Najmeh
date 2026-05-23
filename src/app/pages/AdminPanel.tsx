@@ -32,7 +32,7 @@ export function AdminPanel() {
   });
 
   const [settings, setSettings] = useState({
-    workingHours: { start: '09:00', end: '18:00' },
+    workingHours: { start: '09:00', end: '19:00' },
     breakStart: '13:00',
     breakEnd: '14:00',
     holidays: ['2026-12-25', '2026-12-26', '2026-01-01'] as string[],

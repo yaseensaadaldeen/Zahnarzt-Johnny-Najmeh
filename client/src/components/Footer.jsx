@@ -18,8 +18,8 @@ export default function Footer() {
     { to: '/location', label: { de: 'Standort', en: 'Location' } },
     { to: '/contact', label: { de: 'Kontakt', en: 'Contact' } },
   ];
-  const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Sundgauallee+15,+79110+Freiburg+im+Breisgau';
-  const mapsUrl = 'https://maps.google.com/?q=Sundgauallee+15+Freiburg';
+  const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Schanzstrasse+105,+67063+Ludwigshafen+am+Rhein';
+  const mapsUrl = 'https://maps.google.com/?q=Schanzstrasse+105+Ludwigshafen';
 
   useEffect(() => {
     availabilityApi.get().then(data => {
@@ -68,16 +68,16 @@ export default function Footer() {
             <li>
               <MapPin size={18} />
               <a href={mapsUrl} target="_blank" rel="noreferrer" className={styles.footerLink}>
-                Sundgauallee 15, 79110 Freiburg im Breisgau
+                Schanzstraße 105, 67063 Ludwigshafen am Rhein
               </a>
             </li>
             <li>
               <Phone size={18} />
-              <a href="tel:+49761891010" className={styles.footerLink}>0761 891010</a>
+              <a href="tel:+491622731687" className={styles.footerLink}>+49 162 2731687</a>
             </li>
             <li>
               <Mail size={18} />
-              <a href="mailto:info@zahnarztjohnny.com" className={styles.footerLink}>info@zahnarztjohnny.com</a>
+              <a href="mailto:info.za.johnny@gmail.com" className={styles.footerLink}>info.za.johnny@gmail.com</a>
             </li>
           </ul>
           <div className={styles.actions}>

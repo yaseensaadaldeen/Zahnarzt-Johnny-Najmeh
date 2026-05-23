@@ -161,8 +161,8 @@ export function ServiceDetail() {
                 <p className="text-sm text-muted-foreground mb-3">
                   Not sure if this is the right treatment for you? Contact us for a free consultation.
                 </p>
-                <a href="tel:+497612345678" className="text-primary font-medium text-sm hover:underline">
-                  Call us: +49 761 234 5678
+                <a href="tel:+491622731687" className="text-primary font-medium text-sm hover:underline">
+                  Call us: +49 162 2731687
                 </a>
               </div>
             </Card>

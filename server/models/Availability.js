@@ -29,8 +29,6 @@ async function getOrCreateAvailability() {
       { dayOfWeek: 2, start: '09:00', end: '19:00', enabled: true },
       { dayOfWeek: 3, start: '09:00', end: '19:00', enabled: true },
       { dayOfWeek: 4, start: '09:00', end: '19:00', enabled: true },
-      { dayOfWeek: 5, start: '09:00', end: '19:00', enabled: true },
-      { dayOfWeek: 6, start: '09:00', end: '14:00', enabled: true },
     ],
     outTimes: [],
   });

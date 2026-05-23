@@ -104,7 +104,7 @@ export function Home() {
               Modern Dentistry, Every Day
             </p>
             <p className="text-lg text-muted-foreground mb-8">
-              Sundgauallee 15, Freiburg. Wir sind jeden Tag der Woche für Sie da.
+              Schanzstraße 105, Ludwigshafen am Rhein. Wir sind jeden Tag der Woche für Sie da.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/book">
@@ -314,12 +314,12 @@ export function Home() {
                     <div>
                       <div className="font-semibold mb-1">Address</div>
                       <p className="text-muted-foreground">
-                        Sundgauallee 15<br />
-                        79110 Freiburg im Breisgau<br />
+                        Schanzstraße 105<br />
+                        67063 Ludwigshafen am Rhein<br />
                         Germany
                       </p>
                       <a
-                        href="https://maps.google.com/?q=Sundgauallee+15+Freiburg"
+                        href="https://maps.google.com/?q=Schanzstrasse+105+Ludwigshafen"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary font-medium hover:underline inline-block mt-2"
@@ -332,7 +332,7 @@ export function Home() {
                     <h4 className="font-semibold mb-3">How to Get Here</h4>
                     <ul className="space-y-2 text-muted-foreground">
                       <li>🚗 By car: Free parking behind the clinic</li>
-                      <li>🚊 By tram: Line 5 - stop "Sundgauallee"</li>
+                      <li>🚊 By tram: Tram and bus stops nearby</li>
                       <li>🚶 By foot: 5 minutes from main station</li>
                       <li>📍 Next to Rewe supermarket</li>
                     </ul>

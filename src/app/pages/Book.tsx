@@ -154,8 +154,8 @@ export function Book() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-cyan-50 py-12">
       <SEO
-        title="Termin buchen – Zahnarzt Johnny Najmeh | Zahnarzt in Freiburg"
-        description="Vereinbaren Sie jetzt online Ihren Termin bei Zahnarzt Johnny Najmeh in Freiburg. Wählen Sie Leistung, Datum und Uhrzeit – schnell und unkompliziert."
+        title="Termin buchen – Zahnarzt Johnny Najmeh | Zahnarzt in Ludwigshafen am Rhein"
+        description="Vereinbaren Sie jetzt online Ihren Termin bei Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Wählen Sie Leistung, Datum und Uhrzeit – schnell und unkompliziert."
         canonical="/book"
       />
       <div className="container mx-auto px-4">

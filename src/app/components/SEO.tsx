@@ -12,9 +12,9 @@ interface SEOProps {
 const BASE_URL = 'https://dr-najmeh.de';
 
 export function SEO({
-  title = 'Zahnarzt Johnny Najmeh – Zahnarzt in Freiburg | Moderne Zahnmedizin & Online-Terminbuchung',
-  description = 'Zahnarzt Johnny Najmeh – Ihr Zahnarzt in Freiburg. Professionelle Zahnreinigung, Zahnimplantate, Kieferorthopädie und ästhetische Zahnmedizin. Online-Terminbuchung verfügbar.',
-  keywords = 'Zahnarzt Freiburg, Zahnarzt Johnny Najmeh, Zahnmedizin, Zahnreinigung, Zahnimplantate, Kieferorthopädie, ästhetische Zahnmedizin, Zahnarzttermin',
+  title = 'Zahnarzt Johnny Najmeh – Zahnarzt in Ludwigshafen am Rhein | Moderne Zahnmedizin & Online-Terminbuchung',
+  description = 'Zahnarzt Johnny Najmeh – Ihr Zahnarzt in Ludwigshafen am Rhein. Professionelle Zahnreinigung, Zahnimplantate, Kieferorthopädie und ästhetische Zahnmedizin. Online-Terminbuchung verfügbar.',
+  keywords = 'Zahnarzt Ludwigshafen, Zahnarzt Johnny Najmeh, Zahnmedizin, Zahnreinigung, Zahnimplantate, Kieferorthopädie, ästhetische Zahnmedizin, Zahnarzttermin',
   ogImage = '/images/treatment_room.jpg',
   ogType = 'website',
   canonical = '/',

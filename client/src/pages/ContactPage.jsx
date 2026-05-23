@@ -77,7 +77,7 @@ export default function ContactPage() {
               <CenteredCard>
                 <iframe
                   title={t({ de: 'Karte Zahnarzt Johnny Najmeh', en: 'Dentist Johnny Najmeh map' })}
-                  src="https://www.google.com/maps?q=Sundgauallee%2015%20Freiburg&z=15&output=embed"
+                  src="https://www.google.com/maps?q=Schanzstrasse%20105%20Ludwigshafen&z=15&output=embed"
                   style={{ width: '100%', height: '320px', border: 0 }}
                   loading="lazy"
                 />
@@ -86,9 +86,9 @@ export default function ContactPage() {
                 <div style={{ padding: '28px' }}>
                   <h3 style={{ marginTop: 0, fontFamily: 'var(--font-serif)', fontSize: '1.8rem' }}>{t({ de: 'Taegliche Notfallfenster', en: 'Daily Emergency Slots' })}</h3>
                   <p className="lead">{t({ de: 'Bei akuten Beschwerden rufen Sie uns bitte direkt an.', en: 'For urgent dental issues, please call us directly.' })}</p>
-                  <a href="tel:+497612345678" className="pill" style={{ background: 'var(--primary)', color: '#fff', width: 'fit-content' }}>
+                  <a href="tel:+491622731687" className="pill" style={{ background: 'var(--primary)', color: '#fff', width: 'fit-content' }}>
                     <Phone size={18} />
-                    +49 761 234 5678
+                    +49 162 2731687
                   </a>
                 </div>
               </CenteredCard>

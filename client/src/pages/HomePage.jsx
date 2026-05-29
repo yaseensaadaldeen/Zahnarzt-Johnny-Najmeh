@@ -1,14 +1,9 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, MapPin, Shield, Smile, Sparkles, Star } from 'lucide-react';
-import { services, testimonials } from '../data/siteContent';
+import { MapPin } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-
-const serviceIcons = { Shield, Sparkles, Heart, Smile };
 
 export default function HomePage() {
   const { t } = useLanguage();
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   return (
     <div>
@@ -17,13 +12,14 @@ export default function HomePage() {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
           minHeight: '100vh',
+          gap: 24,
         }}
       >
         <div style={{ overflow: 'hidden' }}>
           <img
             src="/images/5d64f5_1950d7baa2c34d36b9ef9ff86e026a7b~mv2.jpg"
             alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
           />
         </div>
         <div
@@ -103,24 +99,16 @@ export default function HomePage() {
 
       <section className="section section--gradient">
         <div className="container">
-          <div className="grid-3">
-            {services.map((service) => {
-              const Icon = serviceIcons[service.icon];
-              return (
-                <div key={service.id} className="surface-card" style={{ padding: '28px', textAlign: 'center' }}>
-                  {Icon && (
-                    <div style={{ color: 'var(--primary)', marginBottom: '16px' }}>
-                      <Icon size={42} />
-                    </div>
-                  )}
-                  <h3 style={{ margin: '0 0 12px', fontSize: '1.25rem' }}>{t(service.category)}</h3>
-                  <p className="muted" style={{ margin: '0 0 16px', lineHeight: 1.7 }}>{t(service.description)}</p>
-                  <Link to={`/services/${service.id}`} style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                    {t({ de: 'Mehr erfahren', en: 'Learn more' })}
-                  </Link>
-                </div>
-              );
-            })}
+          <div className="text-center" style={{ maxWidth: 760, margin: '0 auto' }}>
+            <h2 className="heading-section">
+              {t({ de: 'Professionalität und Freundlichkeit', en: 'Professionalism and Friendliness' })}
+            </h2>
+            <p className="lead">
+              {t({
+                de: 'Unser Team besteht aus hochqualifizierten Fachleuten, die sich durch ihre Freundlichkeit und Professionalität auszeichnen. Bei uns sind Sie in guten Händen.',
+                en: 'Our team consists of highly qualified professionals who are known for their friendliness and professionalism. You are in good hands with us.',
+              })}
+            </p>
           </div>
         </div>
       </section>
@@ -151,42 +139,6 @@ export default function HomePage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--gradient">
-        <div className="container">
-          <div className="surface-card">
-            <div style={{ padding: '40px', textAlign: 'center' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '16px' }}>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={20} fill="var(--accent)" color="var(--accent)" />
-                ))}
-              </div>
-              <p style={{ fontSize: '1.25rem', lineHeight: 1.8, maxWidth: 780, margin: '0 auto 16px' }}>
-                &ldquo;{t(testimonials[activeTestimonial].quote)}&rdquo;
-              </p>
-              <strong style={{ color: 'var(--primary)' }}>{testimonials[activeTestimonial].author}</strong>
-              <div className="button-row" style={{ justifyContent: 'center', marginTop: '24px' }}>
-                <button
-                  type="button"
-                  className="pill"
-                  style={{ border: '1px solid var(--border)', background: 'var(--muted)' }}
-                  onClick={() => setActiveTestimonial((v) => (v === 0 ? testimonials.length - 1 : v - 1))}
-                >
-                  {t({ de: 'Zurueck', en: 'Previous' })}
-                </button>
-                <button
-                  type="button"
-                  className="pill"
-                  style={{ border: '1px solid var(--border)', background: 'var(--muted)' }}
-                  onClick={() => setActiveTestimonial((v) => (v === testimonials.length - 1 ? 0 : v + 1))}
-                >
-                  {t({ de: 'Weiter', en: 'Next' })}
-                </button>
-              </div>
             </div>
           </div>
         </div>

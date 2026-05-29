@@ -23,7 +23,7 @@ export default function ServiceDetailPage() {
             <ArrowLeft size={18} />
             {t({ de: 'Zurueck zu Leistungen', en: 'Back to Services' })}
           </Link>
-          <span className="pill" style={{ background: 'rgba(8,145,178,0.95)', color: '#fff', marginBottom: '16px' }}>{t(service.category)}</span>
+          <span className="pill" style={{ background: '#993500', color: '#fff', marginBottom: '16px' }}>{t(service.category)}</span>
           <h1 className="heading-display" style={{ marginTop: '16px' }}>{t(service.title)}</h1>
         </div>
       </div>

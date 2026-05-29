@@ -12,7 +12,7 @@ export default function Navbar() {
   const links = [
     { to: '/', label: { de: 'Zahnarztpraxis Johnny Najmeh', en: 'Dentist Johnny Najmeh' } },
     { to: '/services', label: { de: 'Leistungen', en: 'Services' } },
-    { to: '/contact', label: { de: 'Kontakt', en: 'Contact' } },
+    { to: '/contact', label: { de: 'Termin Buchen', en: 'Book Appointment' } },
   ];
 
   return (

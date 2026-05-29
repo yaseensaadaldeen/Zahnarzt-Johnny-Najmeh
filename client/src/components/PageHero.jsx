@@ -7,7 +7,7 @@ export default function PageHero({ title, description, invert = false }) {
         className="section"
         style={{
           background: invert
-            ? 'linear-gradient(135deg, #0891b2 0%, #155e75 100%)'
+            ? 'linear-gradient(135deg, #993500 0%, #7a2b00 100%)'
             : 'linear-gradient(180deg, #ecfeff 0%, #ffffff 100%)',
           color: invert ? '#ffffff' : 'var(--foreground)',
         }}

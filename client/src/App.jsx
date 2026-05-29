@@ -8,8 +8,6 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
-import GalleryPage from './pages/GalleryPage';
-import LocationPage from './pages/LocationPage';
 import ContactPage from './pages/ContactPage';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
@@ -122,8 +120,6 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/location" element={<LocationPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />

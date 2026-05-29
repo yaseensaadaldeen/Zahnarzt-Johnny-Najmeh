@@ -3,7 +3,7 @@
   inset: 0 0 auto 0;
   z-index: 50;
   background: #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .inner {
@@ -41,6 +41,10 @@
   font-weight: 500;
   text-decoration: none;
   font-size: 0.95rem;
+}
+
+.link:hover {
+  color: #993500;
 }
 
 .linkActive {

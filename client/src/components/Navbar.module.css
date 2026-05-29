@@ -2,9 +2,8 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .inner {
@@ -19,39 +18,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.brandMark {
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%);
-  color: #ffffff;
-  font-family: var(--font-serif);
-  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.24);
-}
-
-.brandLogo {
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  object-fit: cover;
-  object-position: left center;
-  box-shadow: 0 12px 24px rgba(8, 145, 178, 0.24);
-  background: #ffffff;
+  text-decoration: none;
 }
 
 .brandTitle {
-  font-family: var(--font-serif);
   font-size: 1.2rem;
   font-weight: 600;
-}
-
-.brandSubtitle {
-  font-size: 0.75rem;
-  color: var(--muted-foreground);
+  color: #000000;
+  white-space: nowrap;
 }
 
 .desktopNav {
@@ -63,19 +37,14 @@
 .link {
   position: relative;
   padding: 12px 16px;
-  color: var(--foreground);
+  color: #000000;
   font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
 }
 
-.activePill {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 4px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #22d3ee 0%, #0891b2 50%, #3b82f6 100%);
-  box-shadow: 0 0 10px rgba(8, 145, 178, 0.5);
+.linkActive {
+  color: #993500;
 }
 
 .right {
@@ -88,27 +57,28 @@
   display: none;
   border: 0;
   background: transparent;
-}
-
-.mobilePanel {
-  display: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  color: #000000;
 }
 
 .mobileNav {
-  display: grid;
+  display: none;
   gap: 8px;
   padding: 12px 0 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .mobileLink {
+  display: block;
   padding: 12px 16px;
   border-radius: 14px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .mobileLinkActive {
-  background: rgba(8, 145, 178, 0.1);
-  color: var(--primary);
+  background: rgba(153, 53, 0, 0.08);
+  color: #993500;
 }
 
 @media (max-width: 960px) {
@@ -116,8 +86,12 @@
     display: none;
   }
 
-  .menuButton,
-  .mobilePanel {
+  .menuButton {
     display: block;
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
   }
 }

@@ -11,6 +11,8 @@ import ServiceDetailPage from './pages/ServiceDetailPage';
 import GalleryPage from './pages/GalleryPage';
 import LocationPage from './pages/LocationPage';
 import ContactPage from './pages/ContactPage';
+import Impressum from './pages/Impressum';
+import Datenschutz from './pages/Datenschutz';
 import DentistPanel from './pages/DentistPanel';
 import DentistShiftManager from './pages/DentistShiftManager';
 import AdminPanel from './pages/AdminPanel';
@@ -123,6 +125,8 @@ export default function App() {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/location" element={<LocationPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
           <Route
             path="/dentist-panel"
             element={

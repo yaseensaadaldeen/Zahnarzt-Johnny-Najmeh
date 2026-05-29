@@ -51,22 +51,22 @@ img {
 }
 
 .section--gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #ecfeff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fdf2e9 100%);
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, #ecfeff 0%, #ffffff 45%, #eff6ff 100%);
+  background: linear-gradient(135deg, #fdf2e9 0%, #ffffff 45%, #fff7ed 100%);
 }
 
 .heading-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(2.75rem, 6vw, 4.25rem);
   line-height: 1.05;
   margin: 0;
 }
 
 .heading-section {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
   margin: 0 0 16px;
@@ -78,7 +78,7 @@ img {
   gap: 8px;
   padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(8, 145, 178, 0.08);
+  background: rgba(153, 53, 0, 0.08);
   color: var(--primary);
   font-size: 14px;
   font-weight: 600;

@@ -6,19 +6,20 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
 
 .title {
   margin: 0 0 16px;
-  font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .subtitle {
   margin: 0 0 16px;
   font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .copy,
@@ -38,23 +39,9 @@
   align-items: flex-start;
 }
 
-.socials {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.socialLink {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  display: grid;
-  place-items: center;
-}
-
 .footerLink {
   color: #cbd5e1;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -69,8 +56,7 @@
   margin-top: 18px;
 }
 
-.actionButton,
-.actionButtonSecondary {
+.actionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -78,16 +64,9 @@
   border-radius: 14px;
   padding: 10px 14px;
   font-weight: 600;
-}
-
-.actionButton {
   background: #0891b2;
   color: #ffffff;
-}
-
-.actionButtonSecondary {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #e2e8f0;
+  text-decoration: none;
 }
 
 .bottom {
@@ -98,22 +77,6 @@
   justify-content: space-between;
   gap: 12px;
   align-items: center;
-}
-
-.panelButton {
-  border: 0;
-  background: rgba(255, 255, 255, 0.08);
-  color: #e2e8f0;
-  border-radius: 14px;
-  padding: 10px 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.accent {
-  color: #fbbf24;
 }
 
 @media (max-width: 960px) {

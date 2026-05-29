@@ -1,8 +1,21 @@
 import express from 'express';
+import nodemailer from 'nodemailer';
 import { Appointment } from '../models/Appointment.js';
 import { Availability } from '../models/Availability.js';
 
 const router = express.Router();
+
+const APPOINTMENT_RECEIVER_EMAIL = 'Info.za.johnny@gmail.com';
+
+const appointmentTransporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER || '',
+    pass: process.env.SMTP_PASS || '',
+  },
+});
 
 function generateTimeSlots(start, end, interval = 30) {
   const slots = [];
@@ -195,6 +208,47 @@ router.post('/', async (req, res, next) => {
     }
 
     const appointment = await Appointment.create(normalizeAppointmentPayload(req.body));
+
+    const { patientName, patientEmail, patientPhone, date, time, service } = req.body;
+    const subject = `Nuevo turno reservado: ${patientName} – ${service || 'Sin servicio'}`;
+    const text = [
+      `Se ha registrado un nuevo turno en la web:`,
+      ``,
+      `Paciente: ${patientName}`,
+      `E-mail: ${patientEmail || '-'}`,
+      `Teléfono: ${patientPhone || '-'}`,
+      `Fecha: ${date}`,
+      `Hora: ${time}`,
+      `Servicio: ${service || '-'}`,
+    ].join('\n');
+    const html = [
+      `<h2>Nuevo turno reservado</h2>`,
+      `<table style="border-collapse:collapse;width:100%">`,
+      `<tr><td style="padding:8px;font-weight:600">Paciente</td><td style="padding:8px">${patientName}</td></tr>`,
+      `<tr><td style="padding:8px;font-weight:600">E-mail</td><td style="padding:8px">${patientEmail || '-'}</td></tr>`,
+      `<tr><td style="padding:8px;font-weight:600">Teléfono</td><td style="padding:8px">${patientPhone || '-'}</td></tr>`,
+      `<tr><td style="padding:8px;font-weight:600">Fecha</td><td style="padding:8px">${date}</td></tr>`,
+      `<tr><td style="padding:8px;font-weight:600">Hora</td><td style="padding:8px">${time}</td></tr>`,
+      `<tr><td style="padding:8px;font-weight:600">Servicio</td><td style="padding:8px">${service || '-'}</td></tr>`,
+      `</table>`,
+    ].join('');
+
+    const mailOptions = {
+      from: `"Sistema de Turnos" <${process.env.SMTP_USER || 'noreply@example.com'}>`,
+      to: APPOINTMENT_RECEIVER_EMAIL,
+      subject,
+      text,
+      html,
+    };
+
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      await appointmentTransporter.sendMail(mailOptions).catch(err => {
+        console.error('Appointment email send failed:', err);
+      });
+    } else {
+      console.log('Appointment notification (SMTP not configured):', { patientName, patientEmail, patientPhone, date, time, service });
+    }
+
     res.status(201).json(appointment);
   } catch (error) {
     next(error);

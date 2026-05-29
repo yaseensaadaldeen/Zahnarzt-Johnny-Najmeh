@@ -1,148 +1,122 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin } from 'lucide-react';
+import { galleryImages } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function HomePage() {
   const { t } = useLanguage();
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  useEffect(() => {
+    if (selectedIndex === null) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setSelectedIndex(null);
+      if (event.key === 'ArrowLeft') {
+        setSelectedIndex((current) => (current === 0 ? galleryImages.length - 1 : current - 1));
+      }
+      if (event.key === 'ArrowRight') {
+        setSelectedIndex((current) => (current === galleryImages.length - 1 ? 0 : current + 1));
+      }
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedIndex]);
+
+  const openGallery = (index) => setSelectedIndex(index);
+  const goPrevious = () => setSelectedIndex((current) => (current === 0 ? galleryImages.length - 1 : current - 1));
+  const goNext = () => setSelectedIndex((current) => (current === galleryImages.length - 1 ? 0 : current + 1));
 
   return (
     <div>
-      <section
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          minHeight: '100vh',
-          gap: 24,
-        }}
-      >
-        <div style={{ overflow: 'hidden' }}>
+      <section className="johnny-hero animate-fade-in">
+        <div className="johnny-hero__image">
           <img
             src="/images/5d64f5_1950d7baa2c34d36b9ef9ff86e026a7b~mv2.jpg"
-            alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+            alt={t({ de: 'Zahnarztpraxis Johnny Najmeh', en: 'Dentist Johnny Najmeh clinic' })}
           />
         </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '60px 40px',
-            background: '#fff',
-          }}
-        >
-          <div style={{ textAlign: 'center', maxWidth: 500 }}>
-            <p
-              style={{
-                fontSize: 50,
-                fontFamily: 'var(--font-sans)',
-                color: '#000',
-                margin: '0 0 8px',
-                lineHeight: 1.1,
-              }}
-            >
-              {t({ de: 'Willkommen in der Zahnarztpraxis', en: 'Welcome to the Dental Practice' })}
-            </p>
-            <h1
-              style={{
-                fontSize: 30,
-                fontFamily: 'var(--font-sans)',
-                color: '#000',
-                margin: '0 0 32px',
-                fontWeight: 400,
-              }}
-            >
-              {t({ de: 'Johnny Najmeh', en: 'Johnny Najmeh' })}
+        <div className="johnny-hero__content">
+          <div className="johnny-hero__copy">
+            <h1>
+              <span className="animate-up" style={{ animationDelay: '0.15s' }}>{t({ de: 'Willkommen in', en: 'Welcome to' })}</span>
+              <span className="animate-up" style={{ animationDelay: '0.3s' }}>{t({ de: 'der Zahnarztpraxis', en: 'the Dental Practice' })}</span>
             </h1>
-            <Link
-              to="/contact"
-              style={{
-                display: 'inline-block',
-                background: '#993500',
-                color: '#fff',
-                padding: '14px 36px',
-                borderRadius: 999,
-                fontWeight: 600,
-                fontSize: 16,
-                textDecoration: 'none',
-              }}
-            >
+            <h2 className="animate-up" style={{ animationDelay: '0.45s' }}>Johnny Najmeh</h2>
+            <Link to="/contact" className="johnny-button animate-up" style={{ animationDelay: '0.6s' }}>
               {t({ de: 'Termin Buchen', en: 'Book Appointment' })}
             </Link>
-            <p
-              style={{
-                fontSize: 16,
-                color: '#000',
-                marginTop: 24,
-                marginBottom: 0,
-              }}
-            >
-              {t({ de: 'Wir sind jeden Tag der Woche für Sie da', en: 'We are here for you every day of the week' })}
-            </p>
+            <p className="animate-up" style={{ animationDelay: '0.75s' }}>{t({ de: 'Wir sind jeden Tag der Woche für Sie da', en: 'We are here for you every day of the week' })}</p>
           </div>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="text-center" style={{ maxWidth: 760, margin: '0 auto' }}>
-            <h2 className="heading-section">{t({ de: 'Unsere Praxis', en: 'Our Practice' })}</h2>
-            <p className="lead">
-              {t({
-                de: 'Entdecken Sie eine Praxis, die mit modernster Technologie und einem einladenden Ambiente dafür sorgt, dass Sie sich bei jedem Besuch wohl fühlen.',
-                en: 'Discover a practice that uses cutting-edge technology and a welcoming atmosphere to ensure you feel comfortable at every visit.',
-              })}
-            </p>
+      <section className="section johnny-intro animate-fade-in">
+        <div className="johnny-intro__copy">
+          <h2 className="heading-section">{t({ de: 'Unsere Praxis', en: 'Our Practice' })}</h2>
+          <p>
+            {t({
+              de: 'Entdecken Sie eine Praxis, die mit modernster Technologie und einem einladenden Ambiente dafür sorgt, dass Sie sich bei jedem Besuch wohl fühlen.',
+              en: 'Discover a practice that uses cutting-edge technology and a welcoming atmosphere to ensure you feel comfortable at every visit.',
+            })}
+          </p>
+        </div>
+      </section>
+
+      <section style={{ padding: '0 0 80px' }}>
+        <div style={{ padding: '0 30px' }}>
+          <div className="johnny-masonry">
+            {galleryImages.map((item, i) => {
+              const isFirst = i === 0 && item.title;
+              const cls = ['johnny-masonry-item', 'animate-up', isFirst ? 'johnny-masonry-item--XL' : (i % 3 === 0 ? 'johnny-masonry-item--TALL' : '')].join(' ');
+
+              if (isFirst) {
+                return (
+                  <button key={item.url} type="button" className={cls} style={{ animationDelay: `${0.1 + i * 0.04}s` }} onClick={() => openGallery(i)}>
+                    <img src={item.url} alt="" />
+                    <div className="johnny-masonry-overlay">
+                      <h2>{t(item.title)}</h2>
+                      <p>{t(item.description)}</p>
+                    </div>
+                  </button>
+                );
+              }
+
+              return (
+                <button key={item.url} type="button" className={cls} style={{ animationDelay: `${0.1 + i * 0.04}s` }} onClick={() => openGallery(i)}>
+                  <img src={item.url} alt="" />
+                  {item.title && (
+                    <div className="johnny-masonry-overlay johnny-masonry-overlay--subtle">
+                      <span className="johnny-masonry-tag">{t(item.title)}</span>
+                    </div>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="section section--gradient">
-        <div className="container">
-          <div className="text-center" style={{ maxWidth: 760, margin: '0 auto' }}>
-            <h2 className="heading-section">
-              {t({ de: 'Professionalität und Freundlichkeit', en: 'Professionalism and Friendliness' })}
-            </h2>
-            <p className="lead">
-              {t({
-                de: 'Unser Team besteht aus hochqualifizierten Fachleuten, die sich durch ihre Freundlichkeit und Professionalität auszeichnen. Bei uns sind Sie in guten Händen.',
-                en: 'Our team consists of highly qualified professionals who are known for their friendliness and professionalism. You are in good hands with us.',
-              })}
-            </p>
-          </div>
+      {selectedIndex !== null ? (
+        <div className="johnny-lightbox" role="dialog" aria-modal="true" aria-label={t({ de: 'Galerie', en: 'Gallery' })}>
+          <button type="button" className="johnny-lightbox__expand" aria-label={t({ de: 'Vollbild', en: 'Fullscreen' })}>
+            ↗
+          </button>
+          <button type="button" className="johnny-lightbox__close" onClick={() => setSelectedIndex(null)} aria-label={t({ de: 'Schließen', en: 'Close' })}>
+            ×
+          </button>
+          <button type="button" className="johnny-lightbox__prev" onClick={goPrevious} aria-label={t({ de: 'Vorheriges Bild', en: 'Previous image' })}>
+            ‹
+          </button>
+          <img src={galleryImages[selectedIndex].url} alt="" />
+          <button type="button" className="johnny-lightbox__next" onClick={goNext} aria-label={t({ de: 'Nächstes Bild', en: 'Next image' })}>
+            ›
+          </button>
         </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="split-layout">
-            <div className="surface-card" style={{ padding: '32px' }}>
-              <span className="eyebrow"><MapPin size={16} /> Ludwigshafen am Rhein</span>
-              <h2 className="heading-section" style={{ marginTop: '20px' }}>
-                {t({ de: 'Standort und Anfahrt', en: 'Location & Directions' })}
-              </h2>
-              <div style={{ display: 'grid', gap: '18px' }}>
-                <div><strong>Schanzstraße 105, 67063 Ludwigshafen am Rhein</strong></div>
-                <div className="muted">{t({ de: 'Mit dem Auto: Kostenlose Parkplaetze hinter der Praxis.', en: 'By car: Free parking behind the clinic.' })}</div>
-                <div className="muted">{t({ de: 'Mit der Strassenbahn: Gute Anbindung an den oeffentlichen Nahverkehr.', en: 'By tram: Well connected to public transit.' })}</div>
-                <div className="muted">{t({ de: 'Zu Fuss: Zentrale Lage mit guter Erreichbarkeit.', en: 'On foot: Central location with easy accessibility.' })}</div>
-                <Link to="/location" className="pill" style={{ background: 'var(--primary)', color: '#fff', width: 'fit-content' }}>
-                  {t({ de: 'Route ansehen', en: 'View Directions' })}
-                </Link>
-              </div>
-            </div>
-            <div className="surface-card">
-              <iframe
-                title={t({ de: 'Zahnarzt Johnny Najmeh Karte', en: 'Dentist Johnny Najmeh map' })}
-                src="https://www.google.com/maps?q=Schanzstrasse%20105%20Ludwigshafen&z=15&output=embed"
-                style={{ width: '100%', minHeight: '420px', border: 0, display: 'block' }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      ) : null}
     </div>
   );
 }

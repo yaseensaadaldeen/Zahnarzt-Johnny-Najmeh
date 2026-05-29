@@ -1,44 +1,38 @@
 import { Link } from 'react-router-dom';
-import { Clock, Heart, Shield, Smile, Sparkles, Stethoscope } from 'lucide-react';
 import { services } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
-
-const icons = {
-  Shield,
-  Sparkles,
-  Heart,
-  Smile,
-  Stethoscope,
-  Clock,
-};
 
 export default function ServicesPage() {
   const { t } = useLanguage();
 
   return (
-    <section className="section">
-      <div className="container">
-        <h2 className="heading-section">{t({ de: 'Unsere Leistungen', en: 'Our Services' })}</h2>
-        <div className="grid-3">
-          {services.map((service) => {
-            const Icon = icons[service.icon];
-            return (
-              <Link key={service.id} to={`/services/${service.id}`} className="surface-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-                {service.image && (
-                  <img src={service.image} alt={t(service.title)} style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'cover', display: 'block' }} />
-                )}
-                <div style={{ padding: '24px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', marginBottom: '8px' }}>
-                    <Icon size={20} />
-                    <span style={{ fontSize: '0.875rem' }}>{t(service.category)}</span>
-                  </div>
-                  <h3 style={{ margin: '0 0 8px', fontFamily: 'var(--font-serif)', fontSize: '1.25rem' }}>{t(service.title)}</h3>
-                  <p className="muted" style={{ margin: 0, lineHeight: 1.6 }}>{t(service.description)}</p>
-                </div>
-              </Link>
-            );
+    <section className="section johnny-services-page">
+      <div className="johnny-page-heading">
+        <h1 className="heading-display">{t({ de: 'Leistunges', en: 'Services' })}</h1>
+        <p className="lead">
+          {t({
+            de: 'Hochwertige Zahnbehandlungen mit klarer Beratung, moderner Technik und ruhiger Betreuung.',
+            en: 'High-quality dental treatments with clear consultation, modern technology, and calm care.',
           })}
-        </div>
+        </p>
+      </div>
+
+      <div className="johnny-service-feature-list">
+        {services.map((service, index) => (
+          <Link
+            key={service.id}
+            to={`/services/${service.id}`}
+            className={`johnny-service-feature ${index % 2 ? 'johnny-service-feature--reverse' : ''} animate-up`}
+            style={{ animationDelay: `${0.1 + index * 0.12}s` }}
+          >
+            <img src={index === 0 ? '/images/veneers.jpg' : service.image} alt={t(service.title)} />
+            <div>
+              <span>{t(service.category)}</span>
+              <h2>{t(service.title)}</h2>
+              <p>{t(service.description)}</p>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

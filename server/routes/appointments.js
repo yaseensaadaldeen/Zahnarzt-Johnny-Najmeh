@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import { Appointment } from '../models/Appointment.js';
@@ -5,17 +6,22 @@ import { Availability } from '../models/Availability.js';
 
 const router = express.Router();
 
-const APPOINTMENT_RECEIVER_EMAIL = 'Info.za.johnny@gmail.com';
+const APPOINTMENT_RECEIVER_EMAIL = 'fachmuster@gmail.com';
 
-const appointmentTransporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true',
-  auth: {
-    user: process.env.SMTP_USER || '',
-    pass: process.env.SMTP_PASS || '',
-  },
-});
+function getAppointmentTransporter() {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      type: 'OAuth2',
+      user: 'fachmuster@gmail.com',
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+    },
+  });
+}
 
 function generateTimeSlots(start, end, interval = 30) {
   const slots = [];
@@ -209,45 +215,85 @@ router.post('/', async (req, res, next) => {
 
     const appointment = await Appointment.create(normalizeAppointmentPayload(req.body));
 
-    const { patientName, patientEmail, patientPhone, date, time, service } = req.body;
-    const subject = `Nuevo turno reservado: ${patientName} – ${service || 'Sin servicio'}`;
+    const patientEmail = req.body.patientEmail;
+    const service = req.body.service;
+    const description = req.body.description;
+
+    function formatDate(de) {
+      const d = new Date(de + 'T12:00:00');
+      return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    const formattedDate = formatDate(date);
+    const subject = 'Du hast eine neue Buchung';
     const text = [
-      `Se ha registrado un nuevo turno en la web:`,
+      `Du hast eine neue Buchung`,
       ``,
-      `Paciente: ${patientName}`,
-      `E-mail: ${patientEmail || '-'}`,
-      `Teléfono: ${patientPhone || '-'}`,
-      `Fecha: ${date}`,
-      `Hora: ${time}`,
-      `Servicio: ${service || '-'}`,
+      `Wir haben gute Nachrichten: Jemand hat soeben einen deiner Services gebucht.`,
+      ``,
+      `Kundenangaben`,
+      `Name:`,
+      `${patientName}`,
+      ``,
+      `E-Mail-Adresse:`,
+      `${patientEmail || '-'}`,
+      ``,
+      `Telefonnummer:`,
+      `${patientPhone || '-'}`,
+      ``,
+      `Nachricht hinzufügen:`,
+      `${description || '-'}`,
+      ``,
+      `Ich stimme der Datenschutzerklärung zu:`,
+      `Checked`,
+      ``,
+      `${service || '-'}`,
+      `Uhrzeit:`,
+      `${formattedDate} um ${time} MESZ`,
+      ``,
+      `Standort:`,
+      `Schanzstraße 105, 67063 Ludwigshafen am Rhein, Germany`,
+      ``,
+      `Mitarbeiter:`,
+      `Dr. Johnny Najmeh`,
     ].join('\n');
     const html = [
-      `<h2>Nuevo turno reservado</h2>`,
+      `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">`,
+      `<h2 style="color:#d13f00">Du hast eine neue Buchung</h2>`,
+      `<p>Wir haben gute Nachrichten: Jemand hat soeben einen deiner Services gebucht.</p>`,
+      `<hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>`,
+      `<h3 style="font-size:1rem;font-weight:600;margin:0 0 8px">Kundenangaben</h3>`,
       `<table style="border-collapse:collapse;width:100%">`,
-      `<tr><td style="padding:8px;font-weight:600">Paciente</td><td style="padding:8px">${patientName}</td></tr>`,
-      `<tr><td style="padding:8px;font-weight:600">E-mail</td><td style="padding:8px">${patientEmail || '-'}</td></tr>`,
-      `<tr><td style="padding:8px;font-weight:600">Teléfono</td><td style="padding:8px">${patientPhone || '-'}</td></tr>`,
-      `<tr><td style="padding:8px;font-weight:600">Fecha</td><td style="padding:8px">${date}</td></tr>`,
-      `<tr><td style="padding:8px;font-weight:600">Hora</td><td style="padding:8px">${time}</td></tr>`,
-      `<tr><td style="padding:8px;font-weight:600">Servicio</td><td style="padding:8px">${service || '-'}</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Name:</td><td style="padding:4px 8px">${patientName}</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">E-Mail-Adresse:</td><td style="padding:4px 8px">${patientEmail || '-'}</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Telefonnummer:</td><td style="padding:4px 8px">${patientPhone || '-'}</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Nachricht hinzufügen:</td><td style="padding:4px 8px">${description || '-'}</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Datenschutzerklärung:</td><td style="padding:4px 8px">Checked</td></tr>`,
       `</table>`,
+      `<hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>`,
+      `<p style="font-size:1.1rem;font-weight:600;margin:0 0 4px">${service || '-'}</p>`,
+      `<table style="border-collapse:collapse;width:100%">`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Uhrzeit:</td><td style="padding:4px 8px">${formattedDate} um ${time} MESZ</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Standort:</td><td style="padding:4px 8px">Schanzstraße 105, 67063 Ludwigshafen am Rhein, Germany</td></tr>`,
+      `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Mitarbeiter:</td><td style="padding:4px 8px">Dr. Johnny Najmeh</td></tr>`,
+      `</table>`,
+      `<p style="margin-top:16px;font-weight:600">Price:</p>`,
+      `<p style="margin:0">Kostenfallabhängig</p>`,
+      `</div>`,
     ].join('');
 
     const mailOptions = {
-      from: `"Sistema de Turnos" <${process.env.SMTP_USER || 'noreply@example.com'}>`,
+      from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
       to: APPOINTMENT_RECEIVER_EMAIL,
       subject,
       text,
       html,
     };
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      await appointmentTransporter.sendMail(mailOptions).catch(err => {
-        console.error('Appointment email send failed:', err);
-      });
-    } else {
-      console.log('Appointment notification (SMTP not configured):', { patientName, patientEmail, patientPhone, date, time, service });
-    }
+      await getAppointmentTransporter().sendMail(mailOptions).catch(err => {
+      console.error('Appointment email send failed:', err);
+      console.log('Appointment notification (fallback):', { patientName, patientEmail, patientPhone, date, time, service, description });
+    });
 
     res.status(201).json(appointment);
   } catch (error) {

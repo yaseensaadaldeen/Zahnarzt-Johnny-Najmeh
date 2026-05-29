@@ -26,6 +26,11 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    description: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     service: {
       type: String,
       required: true,

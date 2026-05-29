@@ -1,37 +1,89 @@
-import { Phone } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft } from 'lucide-react';
+import AppointmentRequestForm from '../components/AppointmentRequestForm';
+import BookingForm from '../components/BookingForm';
+import { bookingServices, services } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ContactPage() {
   const { t } = useLanguage();
+  const [selectedService, setSelectedService] = useState(null);
+  const [booking, setBooking] = useState(null);
+  const primaryService = bookingServices[0];
+
+  const serviceData = [...bookingServices, ...services].find(
+    (s) => t(s.title) === (booking?.service || selectedService?.title)
+  );
+
+  if (!selectedService) {
+    return (
+      <section className="booking-services-page animate-fade-in">
+        <div className="booking-shell">
+          <h1 className="animate-up" style={{ animationDelay: '0.1s' }}>{t({ de: 'Unsere Services', en: 'Our Services' })}</h1>
+          <article className="booking-service-card animate-up" style={{ animationDelay: '0.25s' }}>
+            <img src={primaryService.image} alt={t(primaryService.title)} />
+            <div className="booking-service-card__body">
+              <h2>{t(primaryService.title)}</h2>
+              <hr />
+              <p>{t(primaryService.duration)}</p>
+              <p>{t(primaryService.price)}</p>
+              <button type="button" onClick={() => setSelectedService(primaryService)}>
+                {t({ de: 'Buchen', en: 'Book' })}
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  if (!booking) {
+    return (
+      <section className="booking-flow-page animate-fade-in">
+        <div className="booking-flow-shell">
+          <button type="button" className="booking-back" onClick={() => setSelectedService(null)}>
+            <ChevronLeft size={18} />
+            {t({ de: 'Zurück', en: 'Back' })}
+          </button>
+
+          <div className="booking-flow-heading animate-up" style={{ animationDelay: '0.15s' }}>
+            <h1>{t({ de: 'Service buchen', en: 'Book service' })}</h1>
+            <p>{t({ de: 'Jetzt unsere verfügbaren Termine entdecken und buchen.', en: 'Discover and book our available appointments now.' })}</p>
+          </div>
+
+          <div className="booking-flow-grid animate-up" style={{ animationDelay: '0.3s' }}>
+            <div>
+              <h2>{t({ de: 'Datum und Uhrzeit wählen', en: 'Choose date and time' })}</h2>
+              <AppointmentRequestForm
+                defaultService={t(selectedService.title)}
+                onDateTimeSelected={(data) => setBooking(data)}
+              />
+            </div>
+            <aside className="booking-details">
+              <h2>{t({ de: 'Servicedetails', en: 'Service details' })}</h2>
+              <p>{t(selectedService.title)}</p>
+              <span>{t(selectedService.duration)}</span>
+              <span>{t(selectedService.price)}</span>
+            </aside>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="section">
-      <div className="container">
-        <h2 className="heading-section">{t({ de: 'Kontakt', en: 'Contact' })}</h2>
-        <div className="split-layout" style={{ alignItems: 'start' }}>
-          <div className="surface-card" style={{ padding: '32px' }}>
-            <h3 style={{ marginTop: 0, fontFamily: 'var(--font-serif)', fontSize: '1.5rem' }}>
-              {t({ de: 'Zahnarzt Johnny Najmeh', en: 'Dentist Johnny Najmeh' })}
-            </h3>
-            <p style={{ lineHeight: 1.8 }}>
-              Schanzstraße 105<br />
-              67063 Ludwigshafen am Rhein<br />
-              <a href="tel:+491622731687" style={{ color: 'var(--primary)', textDecoration: 'none' }}>+49 162 2731687</a><br />
-              <a href="mailto:info.za.johnny@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>info.za.johnny@gmail.com</a>
-            </p>
-            <a href="tel:+491622731687" className="pill" style={{ background: 'var(--primary)', color: '#fff', width: 'fit-content', marginTop: '8px' }}>
-              <Phone size={18} />
-              +49 162 2731687
-            </a>
-          </div>
-          <div className="surface-card" style={{ overflow: 'hidden' }}>
-            <iframe
-              title={t({ de: 'Karte Zahnarzt Johnny Najmeh', en: 'Map Dentist Johnny Najmeh' })}
-              src="https://www.google.com/maps?q=Schanzstrasse%20105%20Ludwigshafen&z=15&output=embed"
-              style={{ width: '100%', height: '400px', border: 0, display: 'block' }}
-              loading="lazy"
-            />
-          </div>
+    <section className="booking-flow-page animate-fade-in">
+      <div className="booking-flow-shell">
+        <div className="animate-up" style={{ animationDelay: '0.15s' }}>
+          <BookingForm
+            booking={booking}
+            serviceData={serviceData}
+            onBack={() => setBooking(null)}
+            onDone={() => {
+              setBooking(null);
+              setSelectedService(null);
+            }}
+          />
         </div>
       </div>
     </section>

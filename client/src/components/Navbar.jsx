@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import LanguageToggle from './LanguageToggle';
+import { services } from '../data/siteContent';
 import styles from './Navbar.module.css';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -17,27 +17,40 @@ export default function Navbar() {
 
   return (
     <header className={styles.header}>
-      <div className={`container ${styles.inner}`}>
-        <NavLink to="/" className={styles.brand} onClick={() => setOpen(false)}>
-          <span className={styles.brandTitle}>
+      <div className={styles.inner}>
+        <nav className={styles.desktopNav} aria-label={t({ de: 'Hauptnavigation', en: 'Main navigation' })}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => `${styles.link} ${styles.brandLink} ${isActive ? styles.linkActive : ''}`}
+          >
             {t({ de: 'Zahnarztpraxis Johnny Najmeh', en: 'Dentist Johnny Najmeh' })}
-          </span>
-        </NavLink>
+          </NavLink>
 
-        <nav className={styles.desktopNav}>
-          {links.map((link) => (
+          <div className={styles.dropdown}>
             <NavLink
-              key={link.to}
-              to={link.to}
+              to="/services"
               className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ''}`}
             >
-              {t(link.label)}
+              {t({ de: 'Leistungen', en: 'Services' })}
             </NavLink>
-          ))}
+            <div className={styles.dropdownMenu}>
+              {services.map((service) => (
+                <NavLink key={service.id} to={`/services/${service.id}`} className={styles.dropdownLink}>
+                  {t(service.title)}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ''}`}
+          >
+            {t({ de: 'Termin Buchen', en: 'Book Appointment' })}
+          </NavLink>
         </nav>
 
         <div className={styles.right}>
-          <LanguageToggle />
           <button type="button" className={styles.menuButton} onClick={() => setOpen((value) => !value)}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -56,6 +69,18 @@ export default function Navbar() {
               {t(link.label)}
             </NavLink>
           ))}
+          <div className={styles.mobileSubnav}>
+            {services.map((service) => (
+              <NavLink
+                key={service.id}
+                to={`/services/${service.id}`}
+                className={styles.mobileSubLink}
+                onClick={() => setOpen(false)}
+              >
+                {t(service.title)}
+              </NavLink>
+            ))}
+          </div>
         </div>
       ) : null}
     </header>

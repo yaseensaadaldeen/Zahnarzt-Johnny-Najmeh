@@ -1,24 +1,25 @@
 .toggle {
   display: inline-flex;
   align-items: center;
-  background: rgba(241, 245, 249, 0.9);
-  border-radius: 999px;
+  background: #ffffff;
+  border-radius: 0;
   padding: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid #000000;
 }
 
 .option {
   border: 0;
   background: transparent;
-  color: var(--muted-foreground);
-  font-weight: 600;
+  color: #000000;
+  font-family: var(--font-light);
+  font-weight: 400;
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 0;
   cursor: pointer;
 }
 
 .active {
-  background: var(--primary);
+  background: #000000;
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(153, 53, 0, 0.35);
+  box-shadow: none;
 }

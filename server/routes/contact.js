@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import nodemailer from 'nodemailer';
 
@@ -5,15 +6,20 @@ const router = express.Router();
 
 const RECEIVER_EMAIL = 'Info.za.johnny@gmail.com';
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: process.env.SMTP_SECURE === 'true',
-  auth: {
-    user: process.env.SMTP_USER || '',
-    pass: process.env.SMTP_PASS || '',
-  },
-});
+function getTransporter() {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      type: 'OAuth2',
+      user: 'fachmuster@gmail.com',
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret: process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+    },
+  });
+}
 
 router.post('/', async (req, res) => {
   try {
@@ -24,7 +30,7 @@ router.post('/', async (req, res) => {
     }
 
     const mailOptions = {
-      from: `"${name}" <${process.env.SMTP_USER || email}>`,
+      from: `"${name}" <fachmuster@gmail.com>`,
       to: RECEIVER_EMAIL,
       replyTo: email,
       subject: `Kontaktanfrage: ${subject || 'Kein Betreff'} – von ${name}`,
@@ -53,9 +59,10 @@ router.post('/', async (req, res) => {
       ].join(''),
     };
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      await transporter.sendMail(mailOptions);
-    }
+    await getTransporter().sendMail(mailOptions).catch(err => {
+      console.error('Contact email send failed:', err);
+      console.log('Contact notification (fallback):', { name, email, phone, subject, message });
+    });
 
     const logEntry = { name, email, phone, subject, message, receivedAt: new Date() };
 

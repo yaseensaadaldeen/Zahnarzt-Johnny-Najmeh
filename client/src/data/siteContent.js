@@ -1,5 +1,26 @@
 const wixMedia = (id) => `/images/${id}`;
 
+export const bookingServices = [
+  {
+    id: 'zahnaerztliche-untersuchung',
+    title: { de: 'Zahnärztliche Untersuchung', en: 'Dental Examination' },
+    duration: { de: '30 Min.', en: '30 min.' },
+    price: { de: 'Kostenfallabhängig', en: 'Cost depends on case' },
+    image: wixMedia('5d64f5_b284d564ce1f4f43b27a282b42bba57c~mv2.jpg'),
+  },
+];
+
+export const homeGalleryImages = [
+  wixMedia('5d64f5_ced5b909cca849a9b74254318ee1cf96~mv2.jpg'),
+  wixMedia('5d64f5_4d3e2eaa59a149f7a3e706362aa42191~mv2.jpg'),
+  wixMedia('5d64f5_b284d564ce1f4f43b27a282b42bba57c~mv2.jpg'),
+  wixMedia('5d64f5_5f3e6a70357b403980e8d264e0cdb416~mv2.jpg'),
+  wixMedia('5d64f5_ed7464745c8f47128a625ac166b85e1e~mv2.jpg'),
+  wixMedia('5d64f5_5419f2cb10cc4b13967031e5bb9ea297~mv2.jpg'),
+  wixMedia('5d64f5_2787f2f708674c43bbc31104dbd82473~mv2.jpg'),
+  wixMedia('5d64f5_d032ad9cb3264122863b1a9b82669440~mv2.jpg'),
+];
+
 export const services = [
   {
     id: 'zahnersatz',
@@ -16,7 +37,7 @@ export const services = [
     },
     duration: 'nach Befund',
     price: 'individuell',
-    image: wixMedia('5d64f5_cb0beef0d71f4823a8b864423360bac9~mv2.jpg'),
+    image: wixMedia('5d64f5_848872d48f8f435282da787468da6b96~mv2.jpeg'),
     benefits: {
       de: ['Kronen und Teilkronen', 'Brücken', 'Teil- und Vollprothesen', 'Hochwertige Metalllegierung', 'Ästhetische Vollkeramik'],
       en: ['Crowns and partial crowns', 'Bridges', 'Partial and full dentures', 'High-quality metal alloys', 'Aesthetic all-ceramic'],
@@ -58,7 +79,7 @@ export const services = [
     },
     duration: 'nach Befund',
     price: 'individuell',
-    image: wixMedia('5d64f5_0e456e3ddd784730be755d7b47adaf84~mv2.jpg'),
+    image: wixMedia('5d64f5_fecccd6ab7a245f8bb6dddc7f264ee53~mv2.jpg'),
     benefits: {
       de: ['Systematische Zahnfleischtaschenreinigung', 'Erhalt des Kieferknochens', 'Schutz der Allgemeingesundheit', 'Langfristige Stabilität'],
       en: ['Systematic pocket cleaning', 'Jawbone preservation', 'General health protection', 'Long-term stability'],
@@ -150,7 +171,7 @@ export const galleryImages = [
     url: wixMedia('5d64f5_c7cbe58af220444f9ca064a9f111db60~mv2.jpg'),
     title: { de: 'Praxisimpression', en: 'Clinic Impression' },
     description: {
-      de: 'Originalbild aus der aktuellen Website-Galerie der Praxis.',
+      de: 'Bildmaterial direkt aus der aktuellen Website-Galerie der Praxis.',
       en: 'Original image from the current website gallery.',
     },
   },
@@ -178,6 +199,7 @@ export const galleryImages = [
       en: 'Another original image from the published clinic gallery.',
     },
   },
+  ...homeGalleryImages.slice(1).map((src) => ({ url: src })),
 ];
 
 export const testimonials = [

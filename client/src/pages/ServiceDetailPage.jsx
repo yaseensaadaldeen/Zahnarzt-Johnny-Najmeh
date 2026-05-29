@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock } from 'lucide-react';
 import AppointmentRequestModal from '../components/AppointmentRequestModal';
 import CenteredCard from '../components/CenteredCard';
@@ -11,6 +11,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 export default function ServiceDetailPage() {
   const { serviceId } = useParams();
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const service = services.find((item) => item.id === serviceId) || services[0];
 
@@ -88,6 +89,10 @@ export default function ServiceDetailPage() {
         open={isAppointmentModalOpen}
         onClose={() => setIsAppointmentModalOpen(false)}
         defaultService={t(service.title)}
+        onSuccess={() => {
+          setIsAppointmentModalOpen(false);
+          navigate(`/contact?service=${encodeURIComponent(t(service.title))}`);
+        }}
       />
     </div>
   );

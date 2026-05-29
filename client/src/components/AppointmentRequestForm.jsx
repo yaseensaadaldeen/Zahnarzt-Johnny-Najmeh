@@ -50,6 +50,7 @@ export default function AppointmentRequestForm({ defaultService = '', onDateTime
   const handleContinue = (event) => {
     event.preventDefault();
     if (service && date && time) {
+      if (typeof onDateTimeSelected !== 'function') return;
       onDateTimeSelected({ service, date, time });
     }
   };

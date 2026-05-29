@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import AppointmentRequestForm from '../components/AppointmentRequestForm';
 import BookingForm from '../components/BookingForm';
 import SeoHelmet from '../components/SeoHelmet';
@@ -8,9 +9,23 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 export default function ContactPage() {
   const { t } = useLanguage();
+  const [searchParams] = useSearchParams();
   const [selectedService, setSelectedService] = useState(null);
   const [booking, setBooking] = useState(null);
+  const hasAutoSelected = useRef(false);
   const primaryService = bookingServices[0];
+
+  const serviceParam = searchParams.get('service');
+  const preSelectedService = serviceParam
+    ? [...bookingServices, ...services].find((s) => t(s.title) === serviceParam)
+    : null;
+
+  useEffect(() => {
+    if (preSelectedService && !hasAutoSelected.current) {
+      setSelectedService(preSelectedService);
+      hasAutoSelected.current = true;
+    }
+  }, [preSelectedService]);
 
   const serviceData = [...bookingServices, ...services].find(
     (s) => t(s.title) === (booking?.service || t(selectedService?.title))

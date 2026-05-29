@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock } from 'lucide-react';
-import AppointmentRequestModal from '../components/AppointmentRequestModal';
 import CenteredCard from '../components/CenteredCard';
 import PageHero from '../components/PageHero';
 import SeoHelmet from '../components/SeoHelmet';
@@ -12,7 +10,6 @@ export default function ServiceDetailPage() {
   const { serviceId } = useParams();
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const service = services.find((item) => item.id === serviceId) || services[0];
 
   return (
@@ -65,7 +62,7 @@ export default function ServiceDetailPage() {
                   type="button"
                   className="pill"
                   style={{ background: 'var(--primary)', color: '#fff', justifyContent: 'center', width: '100%', marginBottom: '12px', border: 0, cursor: 'pointer' }}
-                  onClick={() => setIsAppointmentModalOpen(true)}
+                  onClick={() => navigate(`/contact?service=${encodeURIComponent(t(service.title))}`)}
                 >
                   {t({ de: 'Termin buchen', en: 'Book Appointment' })}
                 </button>
@@ -84,15 +81,6 @@ export default function ServiceDetailPage() {
           de: 'Weitere Behandlungen mit dem gleichen Anspruch an Aesthetik, Funktion und Komfort.',
           en: 'Additional treatments with the same focus on aesthetics, function, and comfort.',
         })}
-      />
-      <AppointmentRequestModal
-        open={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        defaultService={t(service.title)}
-        onSuccess={() => {
-          setIsAppointmentModalOpen(false);
-          navigate(`/contact?service=${encodeURIComponent(t(service.title))}`);
-        }}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { CalendarRange, LogOut, Save, Plus, Trash2, Calendar, Clock, Settings2 } from 'lucide-react';
+import SeoHelmet from '../components/SeoHelmet';
 import { useLanguage } from '../contexts/LanguageContext';
 import { availabilityApi } from '../services/api';
 
@@ -98,6 +99,8 @@ export default function DentistShiftManager() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 pt-20">
+      <SeoHelmet path="/dentist/shifts" title={{ de: 'Schichtplan', en: 'Shift Schedule' }} description={{ de: 'Schichtplan-Verwaltung für die Zahnarztpraxis.', en: 'Shift schedule management for the dental practice.' }} />
+      <meta name="robots" content="noindex, nofollow" />
       <div className="container mx-auto px-4 py-8">
         {/* Tab bar */}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 24, gap: 12 }}>

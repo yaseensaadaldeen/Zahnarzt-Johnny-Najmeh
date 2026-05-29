@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, Clock } from 'lucide-react';
 import AppointmentRequestModal from '../components/AppointmentRequestModal';
 import CenteredCard from '../components/CenteredCard';
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { services } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -15,6 +16,11 @@ export default function ServiceDetailPage() {
 
   return (
     <div>
+      <SeoHelmet
+        path={`/services/${service.id}`}
+        title={service.title}
+        description={service.description}
+      />
       <div style={{ position: 'relative', height: '420px' }}>
         <img src={service.image} alt={t(service.title)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%)' }} />

@@ -6,6 +6,7 @@ import AppointmentRequestModal from '../components/AppointmentRequestModal';
 import AppointmentTable from '../components/AppointmentTable';
 import CenteredCard from '../components/CenteredCard';
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { appointmentsApi } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -104,6 +105,8 @@ export default function DentistPanel() {
 
   return (
     <div>
+      <SeoHelmet path="/dentist-panel" title={{ de: 'Praxis-Panel', en: 'Practice Panel' }} description={{ de: 'Zahnarzt-Panel zur Verwaltung von Terminen.', en: 'Dentist panel for managing appointments.' }} />
+      <meta name="robots" content="noindex, nofollow" />
       <PageHero
         invert
         title={t({ de: 'Praxis-Panel', en: 'Practice Panel' })}

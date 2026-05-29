@@ -5,6 +5,7 @@ import AppointmentTable from '../components/AppointmentTable';
 import CenteredCard from '../components/CenteredCard';
 import FormField from '../components/FormField';
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { appointmentsApi, settingsApi } from '../services/api';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -136,6 +137,8 @@ export default function AdminPanel() {
 
   return (
     <div>
+      <SeoHelmet path="/admin-panel" title={{ de: 'Admin-Panel', en: 'Admin Panel' }} description={{ de: 'Admin-Panel zur Verwaltung von Terminen und Praxiseinstellungen.', en: 'Admin panel for managing appointments and practice settings.' }} />
+      <meta name="robots" content="noindex, nofollow" />
       <PageHero
         invert
         title="Admin Panel"

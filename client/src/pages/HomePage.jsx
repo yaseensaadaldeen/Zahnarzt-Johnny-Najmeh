@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { galleryImages } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
+import SeoHelmet from '../components/SeoHelmet';
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -32,6 +33,10 @@ export default function HomePage() {
 
   return (
     <div>
+      <SeoHelmet
+        title={{ de: 'Zahnarzt in Ludwigshafen am Rhein', en: 'Dentist in Ludwigshafen am Rhein' }}
+        description={{ de: 'Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein, Schanzstraße 105. Professionelle Zahnreinigung, Implantate, Kieferorthopädie und ästhetische Zahnmedizin. Jetzt online Termin buchen.', en: 'Dentist Johnny Najmeh in Ludwigshafen am Rhein, Schanzstraße 105. Professional teeth cleaning, implants, orthodontics and aesthetic dentistry. Book your appointment online now.' }}
+      />
       <section className="johnny-hero animate-fade-in">
         <div className="johnny-hero__image">
           <img

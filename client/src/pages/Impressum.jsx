@@ -1,4 +1,5 @@
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Impressum() {
@@ -6,6 +7,7 @@ export default function Impressum() {
 
   return (
     <div>
+      <SeoHelmet path="/impressum" title={{ de: 'Impressum', en: 'Impressum' }} description={{ de: 'Impressum der Zahnarztpraxis Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Angaben gemäß § 5 TMG.', en: 'Legal notice of Dentist Johnny Najmeh in Ludwigshafen am Rhein. Information according to § 5 TMG.' }} />
       <PageHero
         title={t({ de: 'Impressum', en: 'Impressum' })}
         description={t({

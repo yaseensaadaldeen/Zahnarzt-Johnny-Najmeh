@@ -1,6 +1,7 @@
 import { Car, Footprints, MapPin, Navigation, Train } from 'lucide-react';
 import CenteredCard from '../components/CenteredCard';
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function LocationPage() {
@@ -8,6 +9,7 @@ export default function LocationPage() {
 
   return (
     <div>
+      <SeoHelmet path="/location" title={{ de: 'Anfahrt & Standort', en: 'Location & Directions' }} description={{ de: 'Anfahrt zur Zahnarztpraxis Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein, Schanzstraße 105. Mit dem Auto, Zug oder zu Fuß erreichbar.', en: 'Directions to Dentist Johnny Najmeh in Ludwigshafen am Rhein, Schanzstraße 105. Accessible by car, train or on foot.' }} />
       <PageHero
         invert
         title={t({ de: 'Standort', en: 'Location' })}

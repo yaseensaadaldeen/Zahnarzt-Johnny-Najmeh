@@ -9,8 +9,12 @@ import styles from './BookingForm.module.css';
 const PHONE_REGEX = /^[\d\s\-\(\)\.]{4,20}$/;
 
 function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+  try {
+    const d = new Date(dateStr + 'T12:00:00');
+    return d.toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch {
+    return dateStr || '';
+  }
 }
 
 export default function BookingForm({ booking, serviceData, onBack, onDone }) {
@@ -186,7 +190,7 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
 
           <section className={styles.section}>
             <h3 className={styles.sectionTitle}>{t({ de: 'Zahlungsdetails', en: 'Payment Details' })}</h3>
-            <p className={styles.price}>{t(serviceInfo.price) || t({ de: 'Kostenfallabhängig', en: 'Depends on case' })}</p>
+            <p className={styles.price}>{serviceInfo.price ? t(serviceInfo.price) : t({ de: 'Kostenfallabhängig', en: 'Depends on case' })}</p>
           </section>
 
           <p className={styles.agreement}>

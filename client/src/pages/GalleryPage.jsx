@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { galleryImages } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -11,6 +12,7 @@ export default function GalleryPage() {
 
   return (
     <div>
+      <SeoHelmet path="/gallery" title={{ de: 'Galerie', en: 'Gallery' }} description={{ de: 'Bildergalerie der Zahnarztpraxis Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Moderne Praxisräume und Behandlungszimmer.', en: 'Photo gallery of Dentist Johnny Najmeh in Ludwigshafen am Rhein. Modern practice rooms and treatment rooms.' }} />
       <PageHero
         invert
         title={t({ de: 'Unsere Klinik', en: 'Our Clinic' })}

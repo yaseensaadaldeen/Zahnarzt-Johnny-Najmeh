@@ -1,4 +1,5 @@
 import PageHero from '../components/PageHero';
+import SeoHelmet from '../components/SeoHelmet';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Datenschutz() {
@@ -6,6 +7,7 @@ export default function Datenschutz() {
 
   return (
     <div>
+      <SeoHelmet path="/datenschutz" title={{ de: 'Datenschutzerklärung', en: 'Privacy Policy' }} description={{ de: 'Datenschutzerklärung der Zahnarztpraxis Zahnarzt Johnny Najmeh. Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.', en: 'Privacy policy of Dentist Johnny Najmeh. Information about the processing of personal data in accordance with GDPR.' }} />
       <PageHero
         title={t({ de: 'Datenschutzerklärung', en: 'Privacy Policy' })}
         description={t({

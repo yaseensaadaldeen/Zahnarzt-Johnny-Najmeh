@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
 import AppointmentRequestForm from '../components/AppointmentRequestForm';
 import BookingForm from '../components/BookingForm';
+import SeoHelmet from '../components/SeoHelmet';
 import { bookingServices, services } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -12,12 +13,14 @@ export default function ContactPage() {
   const primaryService = bookingServices[0];
 
   const serviceData = [...bookingServices, ...services].find(
-    (s) => t(s.title) === (booking?.service || selectedService?.title)
+    (s) => t(s.title) === (booking?.service || t(selectedService?.title))
   );
 
   if (!selectedService) {
     return (
-      <section className="booking-services-page animate-fade-in">
+      <>
+        <SeoHelmet path="/contact" title={{ de: 'Termin buchen', en: 'Book Appointment' }} description={{ de: 'Vereinbaren Sie einen Termin bei Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Online-Buchung für Zahnreinigung, Untersuchung und weitere Behandlungen.', en: 'Book an appointment at Dentist Johnny Najmeh in Ludwigshafen am Rhein. Online booking for teeth cleaning, examination and other treatments.' }} />
+        <section className="booking-services-page animate-fade-in">
         <div className="booking-shell">
           <h1 className="animate-up" style={{ animationDelay: '0.1s' }}>{t({ de: 'Unsere Services', en: 'Our Services' })}</h1>
           <article className="booking-service-card animate-up" style={{ animationDelay: '0.25s' }}>
@@ -34,12 +37,15 @@ export default function ContactPage() {
           </article>
         </div>
       </section>
+      </>
     );
   }
 
   if (!booking) {
     return (
-      <section className="booking-flow-page animate-fade-in">
+      <>
+        <SeoHelmet path="/contact" title={{ de: 'Termin buchen', en: 'Book Appointment' }} description={{ de: 'Vereinbaren Sie einen Termin bei Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Online-Buchung für Zahnreinigung, Untersuchung und weitere Behandlungen.', en: 'Book an appointment at Dentist Johnny Najmeh in Ludwigshafen am Rhein. Online booking for teeth cleaning, examination and other treatments.' }} />
+        <section className="booking-flow-page animate-fade-in">
         <div className="booking-flow-shell">
           <button type="button" className="booking-back" onClick={() => setSelectedService(null)}>
             <ChevronLeft size={18} />
@@ -68,11 +74,14 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      </>
     );
   }
 
   return (
-    <section className="booking-flow-page animate-fade-in">
+    <>
+      <SeoHelmet path="/contact" title={{ de: 'Termin buchen', en: 'Book Appointment' }} description={{ de: 'Vereinbaren Sie einen Termin bei Zahnarzt Johnny Najmeh in Ludwigshafen am Rhein. Online-Buchung für Zahnreinigung, Untersuchung und weitere Behandlungen.', en: 'Book an appointment at Dentist Johnny Najmeh in Ludwigshafen am Rhein. Online booking for teeth cleaning, examination and other treatments.' }} />
+      <section className="booking-flow-page animate-fade-in">
       <div className="booking-flow-shell">
         <div className="animate-up" style={{ animationDelay: '0.15s' }}>
           <BookingForm
@@ -87,5 +96,6 @@ export default function ContactPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

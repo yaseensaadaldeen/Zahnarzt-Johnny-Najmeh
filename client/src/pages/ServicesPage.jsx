@@ -1,12 +1,19 @@
 import { Link } from 'react-router-dom';
 import { services } from '../data/siteContent';
 import { useLanguage } from '../contexts/LanguageContext';
+import SeoHelmet from '../components/SeoHelmet';
 
 export default function ServicesPage() {
   const { t } = useLanguage();
 
   return (
-    <section className="section johnny-services-page">
+    <>
+      <SeoHelmet
+        path="/services"
+        title={{ de: 'Leistungen', en: 'Services' }}
+        description={{ de: 'Unsere zahnmedizinischen Leistungen: Zahnersatz, Wurzelbehandlung, Parodontose-Behandlung, ästhetische Zahnmedizin, Kinderzahnbehandlungen und Kieferorthopädie in Ludwigshafen am Rhein.', en: 'Our dental services: dental prosthetics, root canal treatment, periodontal treatment, aesthetic dentistry, pediatric dentistry and orthodontics in Ludwigshafen am Rhein.' }}
+      />
+      <section className="section johnny-services-page">
       <div className="johnny-page-heading">
         <h1 className="heading-display">{t({ de: 'Leistunges', en: 'Services' })}</h1>
         <p className="lead">
@@ -35,5 +42,6 @@ export default function ServicesPage() {
         ))}
       </div>
     </section>
+    </>
   );
 }

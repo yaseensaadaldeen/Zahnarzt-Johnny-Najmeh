@@ -54,7 +54,7 @@ export default function AppointmentRequestModal({ open, onClose, defaultService 
               <h2 className="heading-section text-center" style={{ fontSize: '2rem', marginBottom: '24px' }}>
                 {t({ de: 'Schnelle Terminanfrage', en: 'Quick Appointment Request' })}
               </h2>
-              <AppointmentRequestForm defaultService={defaultService} onSuccess={onSuccess} />
+              <AppointmentRequestForm defaultService={defaultService} onDateTimeSelected={(data) => onSuccess?.(data)} />
             </div>
           </motion.div>
         </>

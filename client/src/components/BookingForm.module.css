@@ -122,6 +122,12 @@
   background: #fff;
 }
 
+.inputError {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15) !important;
+  background: #fffef5 !important;
+}
+
 .textarea {
   resize: vertical;
   min-height: 72px;
@@ -131,6 +137,12 @@
   font-size: 0.8rem;
   color: #999;
   margin: -8px 0 0;
+}
+
+.fieldError {
+  font-size: 0.8rem;
+  color: #dc2626;
+  margin: 0;
 }
 
 .checkbox {

@@ -28,6 +28,7 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
   const [privacy, setPrivacy] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const phonePlaceholder = `${'0'.repeat(Math.min(phoneDigits, 4))} ${'0'.repeat(Math.max(phoneDigits - 4, 4)).slice(0, 4)} ${'0'.repeat(Math.max(phoneDigits - 8, 0))}`.trim();
   const digitsOnly = phone.replace(/\D/g, '');
@@ -37,26 +38,33 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
     return digitsOnly.length >= Math.min(phoneDigits - 1, 6) && digitsOnly.length <= phoneDigits;
   };
 
+  const clearFieldError = (field) => {
+    setFieldErrors((prev) => ({ ...prev, [field]: '' }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
+    const errors = {};
 
     if (!name.trim()) {
-      setError(t({ de: 'Bitte geben Sie Ihren Namen ein.', en: 'Please enter your name.' }));
-      return;
+      errors.name = t({ de: 'Bitte geben Sie Ihren Namen ein.', en: 'Please enter your name.' });
     }
     if (!email.trim()) {
-      setError(t({ de: 'Bitte geben Sie Ihre E-Mail-Adresse ein.', en: 'Please enter your email address.' }));
-      return;
+      errors.email = t({ de: 'Bitte geben Sie Ihre E-Mail-Adresse ein.', en: 'Please enter your email address.' });
     }
     if (!validatePhone()) {
-      setError(t({ de: `Bitte geben Sie eine gültige Telefonnummer ein (max. ${phoneDigits} Ziffern)`, en: `Please enter a valid phone number (max ${phoneDigits} digits)` }));
-      return;
+      errors.phone = t({ de: `Bitte geben Sie eine gültige Telefonnummer ein (max. ${phoneDigits} Ziffern)`, en: `Please enter a valid phone number (max ${phoneDigits} digits)` });
     }
     if (!privacy) {
-      setError(t({ de: 'Bitte stimmen Sie der Datenschutzerklaerung zu.', en: 'Please agree to the privacy policy.' }));
+      errors.privacy = t({ de: 'Bitte stimmen Sie der Datenschutzerklaerung zu.', en: 'Please agree to the privacy policy.' });
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
+    setFieldErrors({});
 
     setSubmitting(true);
     try {
@@ -118,29 +126,31 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
                 {t({ de: 'Name *', en: 'Name *' })}
                 <input
                   type="text"
-                  className={styles.input}
+                  className={`${styles.input}${fieldErrors.name ? ` ${styles.inputError}` : ''}`}
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => { setName(e.target.value); clearFieldError('name'); }}
                   placeholder={t({ de: 'Name', en: 'Name' })}
                   required
                 />
+                {fieldErrors.name && <span className={styles.fieldError}>{fieldErrors.name}</span>}
               </label>
 
               <label className={styles.label}>
                 {t({ de: 'E-Mail-Adresse *', en: 'Email Address *' })}
                 <input
                   type="email"
-                  className={styles.input}
+                  className={`${styles.input}${fieldErrors.email ? ` ${styles.inputError}` : ''}`}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { setEmail(e.target.value); clearFieldError('email'); }}
                   placeholder={t({ de: 'E-Mail', en: 'Email' })}
                   required
                 />
+                {fieldErrors.email && <span className={styles.fieldError}>{fieldErrors.email}</span>}
               </label>
 
               <label className={styles.label}>
                 {t({ de: 'Telefonnummer *', en: 'Phone Number *' })}
-                <div className={styles.phoneRow}>
+                <div className={`${styles.phoneRow}${fieldErrors.phone ? ` ${styles.inputError}` : ''}`}>
                   <CountryCodeSelect value={countryCode} onChange={setCountryCode} onDigitsChange={setPhoneDigits} />
                   <input
                     type="tel"
@@ -149,11 +159,13 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
                     onChange={(e) => {
                       const raw = e.target.value.replace(/\D/g, '');
                       if (raw.length <= phoneDigits) setPhone(e.target.value);
+                      clearFieldError('phone');
                     }}
                     placeholder={phonePlaceholder}
                     required
                   />
                 </div>
+                {fieldErrors.phone && <span className={styles.fieldError}>{fieldErrors.phone}</span>}
               </label>
               <p className={styles.hint}>{t({ de: `Bitte eine Telefonnummer eingeben (max. ${phoneDigits} Ziffern).`, en: `Please enter a phone number (max ${phoneDigits} digits).` })}</p>
 
@@ -172,10 +184,11 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
                 <input
                   type="checkbox"
                   checked={privacy}
-                  onChange={(e) => setPrivacy(e.target.checked)}
+                  onChange={(e) => { setPrivacy(e.target.checked); clearFieldError('privacy'); }}
                 />
                 <span>{t({ de: 'Ich stimme der Datenschutzerklärung zu', en: 'I agree to the privacy policy' })}</span>
               </label>
+              {fieldErrors.privacy && <span className={styles.fieldError} style={{ marginTop: -8 }}>{fieldErrors.privacy}</span>}
             </div>
           </section>
 

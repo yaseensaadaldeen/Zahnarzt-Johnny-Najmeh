@@ -68,7 +68,7 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
       const created = await appointmentsApi.create({
         patientName: name.trim(),
         patientEmail: email.trim(),
-        patientPhone: `${countryCode} ${phone.trim()}`,
+        patientPhone: phone.trim() ? `${countryCode} ${phone.trim()}` : '',
         date: booking.date,
         time: booking.time,
         service: booking.service,

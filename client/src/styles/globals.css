@@ -90,6 +90,15 @@ img {
   margin: 0 0 16px;
 }
 
+.heading-subsection {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 24px 0 12px;
+  color: var(--primary);
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

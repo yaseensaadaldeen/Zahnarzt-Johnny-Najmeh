@@ -198,9 +198,11 @@ router.post('/', async (req, res, next) => {
       return res.status(400).json({ message: 'Patient name is required' });
     }
 
-    const phoneError = validatePhone(patientPhone);
-    if (phoneError) {
-      return res.status(400).json({ message: phoneError });
+    if (patientPhone) {
+      const phoneError = validatePhone(patientPhone);
+      if (phoneError) {
+        return res.status(400).json({ message: phoneError });
+      }
     }
 
     const dateError = validateNotPast(date);
@@ -294,6 +296,55 @@ router.post('/', async (req, res, next) => {
       console.error('Appointment email send failed:', err);
       console.log('Appointment notification (fallback):', { patientName, patientEmail, patientPhone, date, time, service, description });
     });
+
+    if (patientEmail) {
+      const patientSubject = 'Ihr Termin wurde reserviert';
+      const patientText = [
+        `Sehr geehrte(r) ${patientName},`,
+        ``,
+        `Ihr Termin bei Zahnarzt Johnny Najmeh wurde erfolgreich reserviert.`,
+        ``,
+        `Termindetails:`,
+        `Service: ${service || '-'}`,
+        `Datum: ${formattedDate}`,
+        `Uhrzeit: ${time} MESZ`,
+        `Standort: Schanzstraße 105, 67063 Ludwigshafen am Rhein, Germany`,
+        ``,
+        `Wir freuen uns auf Ihren Besuch!`,
+        ``,
+        `Mit freundlichen Grüßen,`,
+        `Ihr Team von Zahnarzt Johnny Najmeh`,
+      ].join('\n');
+      const patientHtml = [
+        `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto">`,
+        `<h2 style="color:#d13f00">Ihr Termin wurde reserviert</h2>`,
+        `<p>Sehr geehrte(r) ${patientName},</p>`,
+        `<p>Ihr Termin bei Zahnarzt Johnny Najmeh wurde erfolgreich reserviert.</p>`,
+        `<hr style="border:none;border-top:1px solid #eee;margin:20px 0"/>`,
+        `<h3 style="font-size:1rem;font-weight:600;margin:0 0 8px">Termindetails</h3>`,
+        `<table style="border-collapse:collapse;width:100%">`,
+        `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Service:</td><td style="padding:4px 8px">${service || '-'}</td></tr>`,
+        `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Datum:</td><td style="padding:4px 8px">${formattedDate}</td></tr>`,
+        `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Uhrzeit:</td><td style="padding:4px 8px">${time} MESZ</td></tr>`,
+        `<tr><td style="padding:4px 8px;font-weight:600;white-space:nowrap;vertical-align:top">Standort:</td><td style="padding:4px 8px">Schanzstraße 105, 67063 Ludwigshafen am Rhein, Germany</td></tr>`,
+        `</table>`,
+        `<p>Wir freuen uns auf Ihren Besuch!</p>`,
+        `<p>Mit freundlichen Grüßen,<br/>Ihr Team von Zahnarzt Johnny Najmeh</p>`,
+        `</div>`,
+      ].join('');
+
+      const patientMailOptions = {
+        from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
+        to: patientEmail,
+        subject: patientSubject,
+        text: patientText,
+        html: patientHtml,
+      };
+
+      await getAppointmentTransporter().sendMail(patientMailOptions).catch(err => {
+        console.error('Patient confirmation email send failed:', err);
+      });
+    }
 
     res.status(201).json(appointment);
   } catch (error) {

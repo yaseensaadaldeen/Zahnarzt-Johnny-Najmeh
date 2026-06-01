@@ -34,7 +34,7 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
   const digitsOnly = phone.replace(/\D/g, '');
 
   const validatePhone = () => {
-    if (!phone.trim()) return false;
+    if (!phone.trim()) return true;
     return digitsOnly.length >= Math.min(phoneDigits - 1, 6) && digitsOnly.length <= phoneDigits;
   };
 
@@ -52,9 +52,6 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
     }
     if (!email.trim()) {
       errors.email = t({ de: 'Bitte geben Sie Ihre E-Mail-Adresse ein.', en: 'Please enter your email address.' });
-    }
-    if (!validatePhone()) {
-      errors.phone = t({ de: `Bitte geben Sie eine gültige Telefonnummer ein (max. ${phoneDigits} Ziffern)`, en: `Please enter a valid phone number (max ${phoneDigits} digits)` });
     }
     if (!privacy) {
       errors.privacy = t({ de: 'Bitte stimmen Sie der Datenschutzerklaerung zu.', en: 'Please agree to the privacy policy.' });
@@ -149,7 +146,7 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
               </label>
 
               <label className={styles.label}>
-                {t({ de: 'Telefonnummer *', en: 'Phone Number *' })}
+                {t({ de: 'Telefonnummer', en: 'Phone Number' })}
                 <div className={`${styles.phoneRow}${fieldErrors.phone ? ` ${styles.inputError}` : ''}`}>
                   <CountryCodeSelect value={countryCode} onChange={setCountryCode} onDigitsChange={setPhoneDigits} />
                   <input
@@ -162,7 +159,6 @@ export default function BookingForm({ booking, serviceData, onBack, onDone }) {
                       clearFieldError('phone');
                     }}
                     placeholder={phonePlaceholder}
-                    required
                   />
                 </div>
                 {fieldErrors.phone && <span className={styles.fieldError}>{fieldErrors.phone}</span>}

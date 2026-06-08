@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
     }
 
     const mailOptions = {
-      from: `"${name}" <fachmuster@gmail.com>`,
+      from: `"Zahnarztpraxis Dr Johnny Najmeh" <fachmuster@gmail.com>`,
       to: RECEIVER_EMAIL,
       replyTo: email,
       subject: `Kontaktanfrage: ${subject || 'Kein Betreff'} – von ${name}`,

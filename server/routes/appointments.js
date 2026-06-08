@@ -11,24 +11,37 @@ const APPOINTMENT_RECEIVER_EMAIL = 'fachmuster@gmail.com';
 let _appointmentTransporter = null;
 function getAppointmentTransporter() {
   if (_appointmentTransporter) return _appointmentTransporter;
-  const hasAppPass = !!process.env.GMAIL_APP_PASSWORD;
-  _appointmentTransporter = nodemailer.createTransport(
-    hasAppPass
-      ? {
-          service: 'gmail',
-          auth: { user: 'fachmuster@gmail.com', pass: process.env.GMAIL_APP_PASSWORD },
-        }
-      : {
-          service: 'gmail',
-          auth: {
-            type: 'OAuth2',
-            user: 'fachmuster@gmail.com',
-            clientId: process.env.GMAIL_CLIENT_ID,
-            clientSecret: process.env.GMAIL_CLIENT_SECRET,
-            refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-          },
-        }
-  );
+  if (process.env.BREVO_SMTP_KEY) {
+    _appointmentTransporter = nodemailer.createTransport({
+      host: 'smtp-relay.brevo.com',
+      port: 587,
+      secure: false,
+      auth: { user: 'fachmuster@gmail.com', pass: process.env.BREVO_SMTP_KEY },
+    });
+  } else if (process.env.SENDGRID_API_KEY) {
+    _appointmentTransporter = nodemailer.createTransport({
+      host: 'smtp.sendgrid.net',
+      port: 587,
+      secure: false,
+      auth: { user: 'apikey', pass: process.env.SENDGRID_API_KEY },
+    });
+  } else if (process.env.GMAIL_APP_PASSWORD) {
+    _appointmentTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: 'fachmuster@gmail.com', pass: process.env.GMAIL_APP_PASSWORD },
+    });
+  } else {
+    _appointmentTransporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: 'fachmuster@gmail.com',
+        clientId: process.env.GMAIL_CLIENT_ID,
+        clientSecret: process.env.GMAIL_CLIENT_SECRET,
+        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      },
+    });
+  }
   return _appointmentTransporter;
 }
 

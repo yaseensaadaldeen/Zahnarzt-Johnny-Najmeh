@@ -8,19 +8,28 @@ const router = express.Router();
 
 const APPOINTMENT_RECEIVER_EMAIL = 'fachmuster@gmail.com';
 
+let _appointmentTransporter = null;
 function getAppointmentTransporter() {
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      type: 'OAuth2',
-      user: 'fachmuster@gmail.com',
-      clientId: process.env.GMAIL_CLIENT_ID,
-      clientSecret: process.env.GMAIL_CLIENT_SECRET,
-      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-    },
-  });
+  if (_appointmentTransporter) return _appointmentTransporter;
+  const hasAppPass = !!process.env.GMAIL_APP_PASSWORD;
+  _appointmentTransporter = nodemailer.createTransport(
+    hasAppPass
+      ? {
+          service: 'gmail',
+          auth: { user: 'fachmuster@gmail.com', pass: process.env.GMAIL_APP_PASSWORD },
+        }
+      : {
+          service: 'gmail',
+          auth: {
+            type: 'OAuth2',
+            user: 'fachmuster@gmail.com',
+            clientId: process.env.GMAIL_CLIENT_ID,
+            clientSecret: process.env.GMAIL_CLIENT_SECRET,
+            refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+          },
+        }
+  );
+  return _appointmentTransporter;
 }
 
 function generateTimeSlots(start, end, interval = 30) {
@@ -106,6 +115,22 @@ router.get('/public', async (_req, res, next) => {
     res.json(appointments.map(mapPublicAppointment));
   } catch (error) {
     next(error);
+  }
+});
+
+router.get('/test-email', async (_req, res) => {
+  try {
+    const hasCreds = !!(process.env.GMAIL_CLIENT_ID && process.env.GMAIL_CLIENT_SECRET && process.env.GMAIL_REFRESH_TOKEN);
+    const testMail = {
+      from: '"Test" <fachmuster@gmail.com>',
+      to: 'fachmuster@gmail.com',
+      subject: 'Test from Render',
+      text: 'If you see this, email works',
+    };
+    await getAppointmentTransporter().sendMail(testMail);
+    res.json({ success: true, hasCreds, message: 'Email sent successfully' });
+  } catch (err) {
+    res.status(500).json({ success: false, hasCreds: !!(process.env.GMAIL_CLIENT_ID && process.env.GMAIL_CLIENT_SECRET && process.env.GMAIL_REFRESH_TOKEN), error: err.message, stack: err.stack });
   }
 });
 
@@ -285,7 +310,7 @@ router.post('/', async (req, res, next) => {
     ].join('');
 
     const mailOptions = {
-      from: `"Zahnarztpraxis Dr Johnny Najmeh" <fachmuster@gmail.com>`,
+      from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
       to: APPOINTMENT_RECEIVER_EMAIL,
       subject,
       text,
@@ -334,7 +359,7 @@ router.post('/', async (req, res, next) => {
       ].join('');
 
       const patientMailOptions = {
-        from: `"Zahnarztpraxis Dr Johnny Najmeh" <fachmuster@gmail.com>`,
+        from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
         to: patientEmail,
         subject: patientSubject,
         text: patientText,

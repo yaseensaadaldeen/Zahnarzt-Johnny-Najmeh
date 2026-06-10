@@ -11,15 +11,8 @@ const APPOINTMENT_RECEIVER_EMAIL = 'fachmuster@gmail.com';
 let _appointmentTransporter = null;
 function getAppointmentTransporter() {
   if (_appointmentTransporter) return _appointmentTransporter;
-  if (process.env.BREVO_SMTP_KEY) {
-    _appointmentTransporter = nodemailer.createTransport({
-      host: 'smtp-relay.brevo.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      tls: { rejectUnauthorized: false },
-      auth: { user: process.env.BREVO_SMTP_USER || 'fachmuster@gmail.com', pass: process.env.BREVO_SMTP_KEY },
-    });
+  if (process.env.BREVO_API_KEY) {
+    _appointmentTransporter = 'brevo';
   } else if (process.env.SENDGRID_API_KEY) {
     _appointmentTransporter = nodemailer.createTransport({
       host: 'smtp.sendgrid.net',
@@ -45,6 +38,34 @@ function getAppointmentTransporter() {
     });
   }
   return _appointmentTransporter;
+}
+
+async function sendMail(mailOptions) {
+  const transporter = getAppointmentTransporter();
+  if (transporter === 'brevo') {
+    const { from, to, subject, text, html } = mailOptions;
+    const senderMatch = from.match(/"?([^"]*)"?\s*<([^>]+)>/) || [null, 'Zahnarztpraxis', 'fachmuster@gmail.com'];
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': process.env.BREVO_API_KEY,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        sender: { name: senderMatch ? senderMatch[1] : 'Zahnarztpraxis', email: senderMatch ? senderMatch[2] : 'fachmuster@gmail.com' },
+        to: [{ email: to }],
+        subject,
+        textContent: text || '',
+        htmlContent: html || text || '',
+      }),
+    });
+    if (!res.ok) {
+      const errBody = await res.text();
+      throw new Error(`Brevo API ${res.status}: ${errBody}`);
+    }
+    return;
+  }
+  return transporter.sendMail(mailOptions);
 }
 
 function generateTimeSlots(start, end, interval = 30) {
@@ -142,7 +163,7 @@ router.get('/test-email', async (_req, res) => {
       subject: 'Test from Render',
       text: 'If you see this, email works',
     };
-    await getAppointmentTransporter().sendMail(testMail);
+    await sendMail(testMail);
     res.json({ success: true, hasCreds, message: 'Email sent successfully' });
   } catch (err) {
     res.status(500).json({ success: false, hasCreds: !!(process.env.GMAIL_CLIENT_ID && process.env.GMAIL_CLIENT_SECRET && process.env.GMAIL_REFRESH_TOKEN), error: err.message, stack: err.stack });
@@ -332,7 +353,7 @@ router.post('/', async (req, res, next) => {
       html,
     };
 
-      await getAppointmentTransporter().sendMail(mailOptions).catch(err => {
+      await sendMail(mailOptions).catch(err => {
       console.error('Appointment email send failed:', err);
       console.log('Appointment notification (fallback):', { patientName, patientEmail, patientPhone, date, time, service, description });
     });
@@ -381,7 +402,7 @@ router.post('/', async (req, res, next) => {
         html: patientHtml,
       };
 
-      await getAppointmentTransporter().sendMail(patientMailOptions).catch(err => {
+      await sendMail(patientMailOptions).catch(err => {
         console.error('Patient confirmation email send failed:', err);
       });
     }

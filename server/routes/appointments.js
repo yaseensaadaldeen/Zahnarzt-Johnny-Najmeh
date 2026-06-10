@@ -16,6 +16,8 @@ function getAppointmentTransporter() {
       host: 'smtp-relay.brevo.com',
       port: 587,
       secure: false,
+      requireTLS: true,
+      tls: { rejectUnauthorized: false },
       auth: { user: process.env.BREVO_SMTP_USER || 'fachmuster@gmail.com', pass: process.env.BREVO_SMTP_KEY },
     });
   } else if (process.env.SENDGRID_API_KEY) {

@@ -348,7 +348,7 @@ router.post('/', async (req, res, next) => {
     ].join('');
 
     const mailOptions = {
-      from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
+      from: `"Zahnarztpraxis Dr Johnny Najmeh" <fachmuster@gmail.com>`,
       to: APPOINTMENT_RECEIVER_EMAIL,
       subject,
       text,
@@ -397,7 +397,7 @@ router.post('/', async (req, res, next) => {
       ].join('');
 
       const patientMailOptions = {
-        from: `"Zahnarztpraxis Dr Johnny Najmeh" <info@zahnarztjohnny.com>`,
+        from: `"Zahnarztpraxis Dr Johnny Najmeh" <fachmuster@gmail.com>`,
         to: patientEmail,
         subject: patientSubject,
         text: patientText,

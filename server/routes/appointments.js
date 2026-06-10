@@ -63,6 +63,8 @@ async function sendMail(mailOptions) {
       const errBody = await res.text();
       throw new Error(`Brevo API ${res.status}: ${errBody}`);
     }
+    const result = await res.json();
+    console.log('Brevo email sent:', result.messageId, 'to:', to);
     return;
   }
   return transporter.sendMail(mailOptions);

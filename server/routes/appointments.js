@@ -16,7 +16,7 @@ function getAppointmentTransporter() {
       host: 'smtp-relay.brevo.com',
       port: 587,
       secure: false,
-      auth: { user: 'fachmuster@gmail.com', pass: process.env.BREVO_SMTP_KEY },
+      auth: { user: process.env.BREVO_SMTP_USER || 'fachmuster@gmail.com', pass: process.env.BREVO_SMTP_KEY },
     });
   } else if (process.env.SENDGRID_API_KEY) {
     _appointmentTransporter = nodemailer.createTransport({
